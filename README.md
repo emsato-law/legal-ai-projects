@@ -1,21 +1,21 @@
 # Legal AI Projects
 
-System architectures and design documentation for legal AI tools built for real-world legal practice — covering contract analysis, regulatory knowledge systems, workflow automation, and retrieval-augmented generation (RAG) pipelines.
+System architectures and design documentation for legal AI tools built for real-world legal practice — regulatory knowledge systems, workflow automation, and retrieval-augmented generation (RAG) pipelines.
 
 **Built by a U.S.-qualified technology lawyer working across ASEAN jurisdictions.**
 
-> This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools currently in production or active development. Source code is maintained in private repositories. What follows is the engineering reasoning — the *why* and *how* behind each system.
+This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools currently in production or active development. Source code is maintained in private repositories. What follows is the engineering reasoning — the *why* and *how* behind each system.
 
 ---
 
-## At a Glance
+## At a Glance (for this porfolio)
 
 | Metric | |
 |---|---|
-| **Combined codebase** | ~71,000 lines (Python, JavaScript, HTML/CSS, Markdown) |
-| **Total commits** | 1,035+ across all projects |
-| **Production files** | 198 tracked files |
-| **First commit** | March 2025 |
+| **Combined codebase** | 80,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
+| **Total commits** | 1,500+ across all projects |
+| **Production files** | 250+ tracked files |
+| **First commit** | 2023 |
 | **Stack** | Python · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Full deployment pipelines |
 
 ---
@@ -25,7 +25,7 @@ System architectures and design documentation for legal AI tools built for real-
 ### [Translation Pipeline](./translation-pipeline/)
 **Fully automated legal document translation system**
 
-Production system for translating long-form legal documents across ASEAN languages (Thai, Vietnamese, Bahasa, and others). Handles PDF ingestion, structural preservation, self-correcting loops, and tunable output quality. Built for *low- or under-resourced language* documents that demand precision—statutes, regulations, technical guides—often found only in difficult formats like lengthy, scanned PDFs.
+Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs, especially Thai, Vietnamese, Indonesian, and Malay. Handles PDF and public-webpage ingestion, structure-aware preprocessing, review-aware correction, and export to business-ready formats. Built for documents where precision matters more than fluency—statutes, regulations, and technical guidance that often arrive as complex PDFs and other difficult source formats.
 
 → [Architecture & Design](./translation-pipeline/README.md)
 
@@ -34,7 +34,7 @@ Production system for translating long-form legal documents across ASEAN languag
 ### [OpenClaw Harness](./openclaw-harness/)
 **LLM-to-OS bridge for local task execution**
 
-Three-component system that connects large language models to the local operating system for real-world task execution. Routes tasks between models based on complexity (MiniMax 2.5 Pro for routine operations, Claude Sonnet for complex reasoning). Includes a dashboard for managing automated mini-applications, scheduled jobs, and system analytics.
+OpenClaw connects LLM reasoning to a local execution runtime, enabling automated task execution through filesystem operations, shell commands, application control, and network requests. This deployment integrates multiple models (MiniMax 2.5 Pro for routine operations, Claude Sonnet for complex reasoning) with explicit routing logic. LobsterBoard provides the operational dashboard for managing mini-apps, scheduled jobs, monitoring execution, and system analytics.
 
 → [Architecture & Design](./openclaw-harness/README.md)
 
@@ -70,7 +70,7 @@ Generates structured fee proposals from intake parameters — scope, personnel, 
 ### [Docx Styler](./docx-styler/)
 **AI-driven paragraph styling for Word documents**
 
-Applies consistent paragraph-level styling to legal Word documents using AI classification. Solves the endemic problem of inconsistent formatting in documents that pass through multiple hands — associates, partners, clients, opposing counsel — before final production.
+Applies consistent paragraph-level styling to legal Word documents using AI classification. Addresses the endemic problem of inconsistent formatting in documents that pass through multiple hands — associates, partners, clients, opposing counsel — before final production.
 
 → [Architecture & Design](./docx-styler/README.md)
 
