@@ -1,93 +1,110 @@
-# Legal AI Workflows Summary
+# Legal AI Projects
 
+System architectures and design documentation for legal AI tools built for real-world legal practice — covering contract analysis, regulatory knowledge systems, workflow automation, and retrieval-augmented generation (RAG) pipelines.
 
+**Built by a U.S.-qualified technology lawyer working across ASEAN jurisdictions.**
 
-## Getting started
+> This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools currently in production or active development. Source code is maintained in private repositories. What follows is the engineering reasoning — the *why* and *how* behind each system.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## At a Glance
 
-## Add your files
+| Metric | |
+|---|---|
+| **Combined codebase** | ~71,000 lines (Python, JavaScript, HTML/CSS, Markdown) |
+| **Total commits** | 1,035+ across all projects |
+| **Production files** | 198 tracked files |
+| **First commit** | March 2025 |
+| **Stack** | Python · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Full deployment pipelines |
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+---
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/emsato/legal-ai-workflows-summary.git
-git branch -M main
-git push -uf origin main
-```
+## Projects
 
-## Integrate with your tools
+### [Translation Pipeline](./translation-pipeline/)
+**Fully automated legal document translation system**
 
-* [Set up project integrations](https://gitlab.com/emsato/legal-ai-workflows-summary/-/settings/integrations)
+Production system for translating long-form legal documents across ASEAN languages (Thai, Vietnamese, Bahasa, and others). Handles PDF ingestion, structural preservation, self-correcting loops, and tunable output quality. Built for *low- or under-resourced language* documents that demand precision—statutes, regulations, technical guides—often found only in difficult formats like lengthy, scanned PDFs.
 
-## Collaborate with your team
+→ [Architecture & Design](./translation-pipeline/README.md)
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+---
 
-## Test and Deploy
+### [OpenClaw Harness](./openclaw-harness/)
+**LLM-to-OS bridge for local task execution**
 
-Use the built-in continuous integration in GitLab.
+Three-component system that connects large language models to the local operating system for real-world task execution. Routes tasks between models based on complexity (MiniMax 2.5 Pro for routine operations, Claude Sonnet for complex reasoning). Includes a dashboard for managing automated mini-applications, scheduled jobs, and system analytics.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+→ [Architecture & Design](./openclaw-harness/README.md)
 
-***
+---
 
-# Editing this README
+### [Legal Knowledge Base](./legal-knowledge-base/)
+**Files-first ingestion system for legal RAG**
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system. Currently operational for document processing and structured storage; RAG retrieval layer is in active development.
 
-## Suggestions for a good README
+→ [Architecture & Design](./legal-knowledge-base/README.md)
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+---
 
-## Name
-Choose a self-explaining name for your project.
+### [Legal Jobs Dashboard](./legal-jobs-dashboard/)
+**Self-updating market intelligence for AI + legal roles**
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Automated dashboard that monitors, aggregates, and analyzes AI-related legal job postings. Tracks employer patterns, role requirements, compensation signals, and market trends. Runs on scheduled pipelines with minimal manual intervention.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+→ [Architecture & Design](./legal-jobs-dashboard/README.md)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+---
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### [Fee Proposal Generator](./fee-proposal-generator/)
+**Automated fee proposal drafting for legal engagements**
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Generates structured fee proposals from intake parameters — scope, personnel, billing/deposit requirements. Reduces a 2–3 hour manual drafting process to minutes while maintaining firm-specific formatting and compliance with engagement standards.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+→ [Architecture & Design](./fee-proposal-generator/README.md)
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+---
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### [Docx Styler](./docx-styler/)
+**AI-driven paragraph styling for Word documents**
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Applies consistent paragraph-level styling to legal Word documents using AI classification. Solves the endemic problem of inconsistent formatting in documents that pass through multiple hands — associates, partners, clients, opposing counsel — before final production.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+→ [Architecture & Design](./docx-styler/README.md)
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+---
 
-## License
-For open source projects, say how it is licensed.
+### [SHA-SG](./sha-sg/)
+**Singapore venture capital templates under version control**
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Places standard Singapore law venture capital template agreements (shareholders' agreement, subscription agreement, constitution) into structured version control. Tracks clause-level changes across template revisions and enables diffing between template versions.
+
+→ [Architecture & Design](./sha-sg/README.md)
+
+---
+
+## Design Philosophy
+
+These systems share a common set of architectural principles:
+
+- **Direct API integration over frameworks.** No LangChain, no LlamaIndex. Every LLM call is a deliberate, auditable API call with custom prompt management. This trades convenience for control — essential when outputs carry legal consequences.
+
+- **Model routing by task complexity.** Lightweight models handle routine extraction and classification. Capable models handle reasoning, drafting, and ambiguous interpretation. Cost and latency stay proportional to difficulty.
+
+- **Legal-native data models.** Document structures, metadata schemas, and output formats are designed around how lawyers actually work — not retrofitted from general-purpose AI tooling.
+
+- **Deployment where it matters.** Production systems ship with full deployment pipelines. Smaller tools (Docx Styler, SHA-SG) are designed as local utilities — deployed to the environments where they're actually used.
+
+---
+
+## About
+
+U.S.-qualified technology lawyer at DFDL Legal & Tax, where I serve on the AI Strategic Initiative committee, lead Knowledge Management, and champion firm-wide workflow automation. I design and build the AI systems documented here — 80,000+ lines of production code across legal translation, knowledge management, document automation, and workflow orchestration. Based in ASEAN, where I work across Thai, Singapore, and regional legal frameworks.
+
+For more: [emsato.com](https://emsato.com)/[LinkedIn](https://www.linkedin.com/in/emsato/)
+
+---
+
+*Last updated: 17 March 2026*
