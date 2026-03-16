@@ -8,7 +8,7 @@ This repository documents the architecture, design decisions, and system flows b
 
 ---
 
-## At a Glance (for this porfolio)
+## At a Glance (for this portfolio)
 
 | Metric | |
 |---|---|
@@ -103,7 +103,7 @@ These systems share a common set of architectural principles:
 
 U.S.-qualified technology lawyer at DFDL Legal & Tax, where I serve on the AI Strategic Initiative committee, lead Knowledge Management, and champion firm-wide workflow automation. I design and build the AI systems documented here — 80,000+ lines of production code across legal translation, knowledge management, document automation, and workflow orchestration. Based in ASEAN, where I work across Thai, Singapore, and regional legal frameworks.
 
-For more: [emsato.com](https://emsato.com)/[LinkedIn](https://www.linkedin.com/in/emsato/)
+For more: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.com/in/emsato/)
 
 ---
 
