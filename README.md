@@ -101,7 +101,7 @@ These systems share a common set of architectural principles:
 
 ## About
 
-U.S.-qualified technology lawyer at DFDL Legal & Tax, where I serve on the AI Strategic Initiative committee, lead Knowledge Management, and champion firm-wide workflow automation. I design and build the AI systems documented here — 80,000+ lines of production code across legal translation, knowledge management, document automation, and workflow orchestration. Based in ASEAN, where I work across Thai, Singapore, and regional legal frameworks.
+U.S.-qualified technology lawyer at DFDL Legal & Tax, where I serve on the AI Strategic Initiative committee, lead Knowledge Management, and champion firm-wide workflow automation. I design and build the AI systems documented here — 80,000+ lines of production code across legal translation, knowledge management, document automation, and workflow orchestration. Based in ASEAN, where I work across Thai, Singaporean, and regional legal frameworks.
 
 For more: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.com/in/emsato/)
 
