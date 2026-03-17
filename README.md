@@ -49,12 +49,12 @@ Ingestion and chunking pipeline for primary legal regulations, secondary legal r
 
 ---
 
-### [Legal Jobs Dashboard](./legal-jobs-dashboard/)
-**Self-updating market intelligence for AI + legal roles**
+### [Automated Research Pipelines](./automated-research-pipelines/)
+**Scheduled AI-driven research, summarization, and distribution**
 
-Automated dashboard that monitors, aggregates, and analyzes AI-related legal job postings. Tracks employer patterns, role requirements, compensation signals, and market trends. Runs on scheduled pipelines with minimal manual intervention.
+A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipeline spawns an isolated agent session, performs targeted web research, produces LLM-generated summaries, and distributes results to Discord channels and dashboards. Currently runs daily news briefings and an AI legal tech jobs/funding tracker.
 
-→ [Architecture & Design](./legal-jobs-dashboard/README.md)
+→ [Architecture & Design](./automated-research-pipelines/README.md)
 
 ---
 
