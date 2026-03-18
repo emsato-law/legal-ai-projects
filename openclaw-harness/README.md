@@ -10,6 +10,8 @@ A system that connects large language models to the local operating system, enab
   <br><sub>As of 18 March 2026</sub>
 </div>
 
+<p>&nbsp;</p>
+
 ---
 
 ## Background

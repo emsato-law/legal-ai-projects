@@ -27,23 +27,29 @@ This repository documents the architecture, design decisions, and system flows b
 
 Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs, especially Thai, Vietnamese, Indonesian, and Malay. Handles PDF and public-webpage ingestion, structure-aware preprocessing, review-aware correction, and export to business-ready formats. Built for documents where precision matters more than fluency—statutes, regulations, and technical guidance that often arrive as complex PDFs and other difficult source formats.
 
-<div align="center" style="margin-bottom:2em">
+<div align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
   <br><em>Home — Quick Translation and Advanced Mode entry points</em>
   <br><sub>As of 18 March 2026</sub>
 </div>
 
-<div align="center" style="margin-bottom:2em">
+<p>&nbsp;</p>
+
+<div align="center">
   <img src="./translation-pipeline/screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="600">
   <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
   <br><sub>As of 18 March 2026</sub>
 </div>
+
+<p>&nbsp;</p>
 
 <div align="center">
   <img src="./translation-pipeline/screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="600">
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
   <br><sub>As of 18 March 2026</sub>
 </div>
+
+<p>&nbsp;</p>
 
 → [Architecture & Design](./translation-pipeline/README.md)
 
@@ -59,6 +65,8 @@ OpenClaw connects LLM reasoning to a local execution runtime, enabling automated
   <br><em>OCR Dashboard — Multi-engine document processing with ASEAN language support</em>
   <br><sub>As of 18 March 2026</sub>
 </div>
+
+<p>&nbsp;</p>
 
 → [Architecture & Design](./openclaw-harness/README.md)
 
@@ -83,6 +91,8 @@ A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipel
   <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
   <br><sub>As of 18 March 2026</sub>
 </div>
+
+<p>&nbsp;</p>
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 
