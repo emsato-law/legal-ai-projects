@@ -30,8 +30,10 @@ Production-oriented translation pipeline for long-form legal and regulatory docu
 <p align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
   <br><em>Home — Quick Translation and Advanced Mode entry points</em>
+  <br><sub>As of 18 March 2026</sub>
   <img src="./translation-pipeline/screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="600">
   <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
+  <br><sub>As of 18 March 2026</sub>
   <img src="./translation-pipeline/screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="600">
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
   <br><sub>As of 18 March 2026</sub>
