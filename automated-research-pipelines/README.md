@@ -26,33 +26,33 @@ These pipelines replace that daily manual scan with scheduled, AI-driven researc
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│               CRON TRIGGER                           │
-│                                                      │
-│  LobsterBoard Scheduler → Spawn Isolated Session     │
+│               CRON TRIGGER                          │
+│                                                     │
+│  LobsterBoard Scheduler → Spawn Isolated Session    │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│              RESEARCH PHASE                          │
-│                                                      │
-│  Web Search (Brave) → Source Filtering →              │
-│  Content Extraction → Domain-Specific Focus           │
+│              RESEARCH PHASE                         │
+│                                                     │
+│  Web Search (Brave) → Source Filtering →            │
+│  Content Extraction → Domain-Specific Focus         │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│            AI SUMMARIZATION                          │
-│                                                      │
-│  MiniMax AI → Structured Summary Generation →         │
-│  Source Attribution → Quality Formatting               │
+│            AI SUMMARIZATION                         │
+│                                                     │
+│  MiniMax AI → Structured Summary Generation →       │
+│  Source Attribution → Quality Formatting            │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│              DISTRIBUTION                            │
-│                                                      │
-│  Discord Channels · Git Commit & Push ·               │
-│  LobsterBoard Sync · Main Session Report              │
+│              DISTRIBUTION                           │
+│                                                     │
+│  Discord Channels · Git Commit & Push ·             │
+│  LobsterBoard Sync · Main Session Report            │
 └─────────────────────────────────────────────────────┘
 ```
 
