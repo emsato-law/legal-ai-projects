@@ -30,20 +30,22 @@ Production-oriented translation pipeline for long-form legal and regulatory docu
 <p align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
   <br><em>Home — Quick Translation and Advanced Mode entry points</em>
-  <br><sub>As of 18 March 2026</sub>
 </p>
+<p align="center"><sub>As of 18 March 2026</sub></p>
+<br><br>
 
 <p align="center">
   <img src="./translation-pipeline/screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="600">
   <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
-  <br><sub>As of 18 March 2026</sub>
 </p>
+<p align="center"><sub>As of 18 March 2026</sub></p>
+<br><br>
 
 <p align="center">
   <img src="./translation-pipeline/screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="600">
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
-  <br><sub>As of 18 March 2026</sub>
 </p>
+<p align="center"><sub>As of 18 March 2026</sub></p>
 
 → [Architecture & Design](./translation-pipeline/README.md)
 
@@ -57,8 +59,8 @@ OpenClaw connects LLM reasoning to a local execution runtime, enabling automated
 <p align="center">
   <img src="./openclaw-harness/screenshots/ocr-dashboard.png" alt="OCR Dashboard" width="600">
   <br><em>OCR Dashboard — Multi-engine document processing with ASEAN language support</em>
-  <br><sub>As of 18 March 2026</sub>
 </p>
+<p align="center"><sub>As of 18 March 2026</sub></p>
 
 → [Architecture & Design](./openclaw-harness/README.md)
 
@@ -81,8 +83,8 @@ A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipel
 <p align="center">
   <img src="./automated-research-pipelines/screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="600">
   <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
-  <br><sub>As of 18 March 2026</sub>
 </p>
+<p align="center"><sub>As of 18 March 2026</sub></p>
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 
