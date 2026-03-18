@@ -4,6 +4,11 @@
 
 A system that connects large language models to the local operating system, enabling AI-driven execution of real-world tasks. Routes between models based on task complexity, manages a library of reusable mini-applications, and provides operational visibility through a unified dashboard.
 
+<p align="center">
+  <img src="./screenshots/ocr-dashboard.png" alt="OCR Dashboard" width="700">
+  <br><em>OCR Dashboard — Multi-engine document processing with ASEAN language support</em>
+</p>
+
 ---
 
 ## Background

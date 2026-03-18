@@ -15,6 +15,25 @@ The system is built around a 4-step pipeline:
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="./screenshots/splash.png" alt="Translation Pipeline — Home" width="700">
+  <br><em>Home — Quick Translation and Advanced Mode entry points</em>
+</p>
+
+<p align="center">
+  <img src="./screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="700">
+  <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
+</p>
+
+<p align="center">
+  <img src="./screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="700">
+  <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
+</p>
+
+---
+
 ## What This Project Is Solving
 
 General-purpose translation tools often perform reasonably well on short text, but legal documents introduce a different class of problems:
