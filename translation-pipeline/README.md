@@ -187,15 +187,15 @@ The real differentiator is not that it eliminates all review. It is that it trie
 
 This is an active production project, not a finished research artifact.
 
-The strongest current story is:
+The strongest current coverage is:
 
 - born-digital legal/regulatory PDFs
 - English-hub translation flows
 - review-aware output for high-risk cases
 
-The biggest remaining technical gap is still the hardest class of input:
+Planned improvements once the deployment moves to higher-spec infrastructure:
 
-- scanned, layout-heavy, multilingual documents on constrained infrastructure
+- Full OCR support for scanned, layout-heavy, and multilingual documents (currently gated on the low-end server in use)
 
 ---
 
