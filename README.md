@@ -27,15 +27,19 @@ This repository documents the architecture, design decisions, and system flows b
 
 Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs, especially Thai, Vietnamese, Indonesian, and Malay. Handles PDF and public-webpage ingestion, structure-aware preprocessing, review-aware correction, and export to business-ready formats. Built for documents where precision matters more than fluency—statutes, regulations, and technical guidance that often arrive as complex PDFs and other difficult source formats.
 
-<div align="center">
+<div align="center" style="margin-bottom:2em">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
   <br><em>Home — Quick Translation and Advanced Mode entry points</em>
   <br><sub>As of 18 March 2026</sub>
-  <br><br>
+</div>
+
+<div align="center" style="margin-bottom:2em">
   <img src="./translation-pipeline/screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="600">
   <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
   <br><sub>As of 18 March 2026</sub>
-  <br><br>
+</div>
+
+<div align="center">
   <img src="./translation-pipeline/screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="600">
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
   <br><sub>As of 18 March 2026</sub>
