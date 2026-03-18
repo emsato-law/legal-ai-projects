@@ -31,6 +31,7 @@ Production-oriented translation pipeline for long-form legal and regulatory docu
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
   <img src="./translation-pipeline/screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="600">
   <img src="./translation-pipeline/screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="600">
+  <br><sub>As of 18 March 2026</sub>
 </p>
 
 → [Architecture & Design](./translation-pipeline/README.md)
@@ -44,6 +45,7 @@ OpenClaw connects LLM reasoning to a local execution runtime, enabling automated
 
 <p align="center">
   <img src="./openclaw-harness/screenshots/ocr-dashboard.png" alt="OCR Dashboard" width="600">
+  <br><sub>As of 18 March 2026</sub>
 </p>
 
 → [Architecture & Design](./openclaw-harness/README.md)
@@ -66,6 +68,7 @@ A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipel
 
 <p align="center">
   <img src="./automated-research-pipelines/screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="600">
+  <br><sub>As of 18 March 2026</sub>
 </p>
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
@@ -121,4 +124,4 @@ For more: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.co
 
 ---
 
-*Last updated: 17 March 2026*
+*Last updated: 18 March 2026*

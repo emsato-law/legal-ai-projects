@@ -9,6 +9,8 @@ A set of autonomous research pipelines that run on cron schedules via OpenClaw. 
   <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
 </p>
 
+<p align="center"><sub>As of 18 March 2026</sub></p>
+
 ---
 
 ## Problem

@@ -9,6 +9,8 @@ A system that connects large language models to the local operating system, enab
   <br><em>OCR Dashboard — Multi-engine document processing with ASEAN language support</em>
 </p>
 
+<p align="center"><sub>As of 18 March 2026</sub></p>
+
 ---
 
 ## Background

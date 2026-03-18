@@ -32,6 +32,8 @@ The system is built around a 4-step pipeline:
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
 </p>
 
+<p align="center"><sub>As of 18 March 2026</sub></p>
+
 ---
 
 ## What This Project Is Solving
