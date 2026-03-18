@@ -17,25 +17,19 @@ The system is built around a 4-step pipeline:
 
 ## Screenshots
 
-<p align="center">
+<div align="center">
   <img src="./screenshots/splash.png" alt="Translation Pipeline — Home" width="700">
   <br><em>Home — Quick Translation and Advanced Mode entry points</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
-<br><br>
-
-<p align="center">
+  <br><sub>As of 18 March 2026</sub>
+  <br><br>
   <img src="./screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="700">
   <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
-<br><br>
-
-<p align="center">
+  <br><sub>As of 18 March 2026</sub>
+  <br><br>
   <img src="./screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="700">
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
+  <br><sub>As of 18 March 2026</sub>
+</div>
 
 ---
 

@@ -27,25 +27,19 @@ This repository documents the architecture, design decisions, and system flows b
 
 Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs, especially Thai, Vietnamese, Indonesian, and Malay. Handles PDF and public-webpage ingestion, structure-aware preprocessing, review-aware correction, and export to business-ready formats. Built for documents where precision matters more than fluency—statutes, regulations, and technical guidance that often arrive as complex PDFs and other difficult source formats.
 
-<p align="center">
+<div align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
   <br><em>Home — Quick Translation and Advanced Mode entry points</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
-<br><br>
-
-<p align="center">
+  <br><sub>As of 18 March 2026</sub>
+  <br><br>
   <img src="./translation-pipeline/screenshots/advanced-mode.png" alt="Translation Pipeline — Advanced Mode" width="600">
   <br><em>Advanced Mode — Step-by-step pipeline control with per-stage review</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
-<br><br>
-
-<p align="center">
+  <br><sub>As of 18 March 2026</sub>
+  <br><br>
   <img src="./translation-pipeline/screenshots/task-dashboard.png" alt="Translation Pipeline — Task Dashboard" width="600">
   <br><em>Task Dashboard — Production usage tracking across translation jobs</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
+  <br><sub>As of 18 March 2026</sub>
+</div>
 
 → [Architecture & Design](./translation-pipeline/README.md)
 
@@ -56,11 +50,11 @@ Production-oriented translation pipeline for long-form legal and regulatory docu
 
 OpenClaw connects LLM reasoning to a local execution runtime, enabling automated task execution through filesystem operations, shell commands, application control, and network requests. This deployment integrates multiple models (MiniMax 2.5 Pro for routine operations, Claude Sonnet for complex reasoning) with explicit routing logic. LobsterBoard provides the operational dashboard for managing mini-apps, scheduled jobs, monitoring execution, and system analytics.
 
-<p align="center">
+<div align="center">
   <img src="./openclaw-harness/screenshots/ocr-dashboard.png" alt="OCR Dashboard" width="600">
   <br><em>OCR Dashboard — Multi-engine document processing with ASEAN language support</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
+  <br><sub>As of 18 March 2026</sub>
+</div>
 
 → [Architecture & Design](./openclaw-harness/README.md)
 
@@ -80,11 +74,11 @@ Ingestion and chunking pipeline for primary legal regulations, secondary legal r
 
 A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipeline spawns an isolated agent session, performs targeted web research, produces LLM-generated summaries, and distributes results to Discord channels and dashboards. Currently runs daily news briefings and an AI legal tech jobs/funding tracker.
 
-<p align="center">
+<div align="center">
   <img src="./automated-research-pipelines/screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="600">
   <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
-</p>
-<p align="center"><sub>As of 18 March 2026</sub></p>
+  <br><sub>As of 18 March 2026</sub>
+</div>
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 

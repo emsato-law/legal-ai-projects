@@ -4,12 +4,11 @@
 
 A set of autonomous research pipelines that run on cron schedules via OpenClaw. Each pipeline spawns an isolated agent session, performs targeted web research, produces structured summaries using LLM analysis, and distributes results to designated channels — with no manual intervention.
 
-<p align="center">
+<div align="center">
   <img src="./screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="700">
   <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
-</p>
-
-<p align="center"><sub>As of 18 March 2026</sub></p>
+  <br><sub>As of 18 March 2026</sub>
+</div>
 
 ---
 
