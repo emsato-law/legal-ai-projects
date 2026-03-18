@@ -23,36 +23,36 @@ This happens because legal documents accumulate formatting like sediment — eac
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│            PHASE 1: EXTRACT + PREDICT                │
-│                                                      │
-│  Input DOCX                                          │
-│       │                                              │
-│       ▼                                              │
-│  Paragraph Extraction (text, position, context)      │
-│       │                                              │
-│       ▼                                              │
-│  Gemini Classification                               │
-│  (predict style per paragraph)                       │
-│       │                                              │
-│       ▼                                              │
-│  Excel Worksheet (worksheet_pred.xlsx)               │
-│  with AI predictions for human review                │
-│                                                      │
+│            PHASE 1: EXTRACT + PREDICT               │
+│                                                     │
+│  Input DOCX                                         │
+│       │                                             │
+│       ▼                                             │
+│  Paragraph Extraction (text, position, context)     │
+│       │                                             │
+│       ▼                                             │
+│  Gemini Classification                              │
+│  (predict style per paragraph)                      │
+│       │                                             │
+│       ▼                                             │
+│  Excel Worksheet (worksheet_pred.xlsx)              │
+│  with AI predictions for human review               │
+│                                                     │
 │       ↓  ← HUMAN REVIEWS & CORRECTS IN EXCEL        │
-│                                                      │
+│                                                     │
 └─────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────┐
-│            PHASE 2: REAPPLY STYLES                   │
-│                                                      │
-│  Reviewed Excel + Original DOCX                      │
-│       │                                              │
-│       ▼                                              │
-│  Style Application Engine                            │
-│  (maps approved styles back to paragraphs)           │
-│       │                                              │
-│       ▼                                              │
-│  Clean, consistently styled output DOCX              │
+│            PHASE 2: REAPPLY STYLES                  │
+│                                                     │
+│  Reviewed Excel + Original DOCX                     │
+│       │                                             │
+│       ▼                                             │
+│  Style Application Engine                           │
+│  (maps approved styles back to paragraphs)          │
+│       │                                             │
+│       ▼                                             │
+│  Clean, consistently styled output DOCX             │
 └─────────────────────────────────────────────────────┘
 ```
 
