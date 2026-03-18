@@ -23,31 +23,31 @@ Yet in most firms, proposals are assembled manually: open a previous proposal, f
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  WEB FRONTEND                        │
-│              (Tailwind CSS + JS)                     │
-│                                                      │
-│  Template Selection → Guided Questionnaire →         │
-│  Conditional Logic → Review & Generate               │
+│                  WEB FRONTEND                       │
+│              (Tailwind CSS + JS)                    │
+│                                                     │
+│  Template Selection → Guided Questionnaire →        │
+│  Conditional Logic → Review & Generate              │
 └──────────────────────┬──────────────────────────────┘
                        │ API calls
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│                FastAPI BACKEND                        │
-│                                                      │
-│  GET /api/templates/list                             │
-│  GET /api/questions/parts/{part_id}                  │
-│  GET /api/questions/conditions                       │
-│  POST /api/generate/document                         │
+│                FastAPI BACKEND                      │
+│                                                     │
+│  GET /api/templates/list                            │
+│  GET /api/questions/parts/{part_id}                 │
+│  GET /api/questions/conditions                      │
+│  POST /api/generate/document                        │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│             DOCUMENT ENGINE                          │
-│                                                      │
-│  Template Selection → Answer Injection →             │
-│  Section Assembly → DOCX Merge →                     │
-│  Page Number & Section Break Handling →              │
-│  Final Document Output                               │
+│             DOCUMENT ENGINE                         │
+│                                                     │
+│  Template Selection → Answer Injection →            │
+│  Section Assembly → DOCX Merge →                    │
+│  Page Number & Section Break Handling →             │
+│  Final Document Output                              │
 └─────────────────────────────────────────────────────┘
 ```
 
