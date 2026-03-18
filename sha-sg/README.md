@@ -23,28 +23,28 @@ Software engineering solved this problem decades ago with version control. This 
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│             SOURCE TEMPLATES                         │
-│                                                      │
-│  Standard form SHA · Subscription Agreements ·       │
-│  Constitution · CARE (Conv. Agreement Re Equity)     │
+│             SOURCE TEMPLATES                        │
+│                                                     │
+│  Standard form SHA · Subscription Agreements ·      │
+│  Constitution · CARE (Conv. Agreement Re Equity)    │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│          STRUCTURAL DECOMPOSITION                    │
-│                                                      │
-│  Full agreement → Clause-level breakdown:            │
-│  Definitions · Conditions Precedent · Warranties ·   │
-│  Transfer Restrictions · Board Composition ·         │
-│  Anti-Dilution · Drag/Tag · Governing Law            │
+│          STRUCTURAL DECOMPOSITION                   │
+│                                                     │
+│  Full agreement → Clause-level breakdown:           │
+│  Definitions · Conditions Precedent · Warranties ·  │
+│  Transfer Restrictions · Board Composition ·        │
+│  Anti-Dilution · Drag/Tag · Governing Law           │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│           VERSION-CONTROLLED STORAGE                 │
-│                                                      │
-│  Git-tracked clause files · Metadata per clause ·    │
-│  Amendment history · Cross-template references       │
+│           VERSION-CONTROLLED STORAGE                │
+│                                                     │
+│  Git-tracked clause files · Metadata per clause ·   │
+│  Amendment history · Cross-template references      │
 └─────────────────────────────────────────────────────┘
 
 ```
