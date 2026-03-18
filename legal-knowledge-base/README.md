@@ -24,42 +24,42 @@ Legal RAG needs a *legal-native ingestion layer* — one that understands docume
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│              SOURCE MATERIALS                        │
-│                                                      │
-│  sources/incoming/    ← one active item at a time    │
-│  sources/archive/     ← processed items              │
+│              SOURCE MATERIALS                       │
+│                                                     │
+│  sources/incoming/    ← one active item at a time   │
+│  sources/archive/     ← processed items             │
 │  TH-Legal/, TH-ICO-Portal/, etc. ← legacy backlog   │
 └──────────────────────┬──────────────────────────────┘
                        │  kb process
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│           CLASSIFICATION & REVIEW                    │
-│                                                      │
-│  Auto-generate starter kb.yaml:                      │
-│  Document type · Jurisdiction · Authority ·           │
-│  Language · Temporal metadata · Provenance            │
-│                                                      │
+│           CLASSIFICATION & REVIEW                   │
+│                                                     │
+│  Auto-generate starter kb.yaml:                     │
+│  Document type · Jurisdiction · Authority ·         │
+│  Language · Temporal metadata · Provenance          │
+│                                                     │
 │       ↓  ← HUMAN REVIEWS, CORRECTS, CONFIRMS        │
-│                                                      │
+│                                                     │
 └──────────────────────┬──────────────────────────────┘
                        │  kb process (confirmed: true)
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│           CANONICAL KB (kb/)                         │
-│                                                      │
-│  kb/primary_law/     ← versioned legal instruments   │
-│  kb/notes/           ← commentary & analysis         │
-│  kb/reference/       ← supporting materials          │
-│  kb/templates/       ← reusable working documents    │
-│  kb/_audit/          ← permanent ingest audit trail  │
+│           CANONICAL KB (kb/)                        │
+│                                                     │
+│  kb/primary_law/     ← versioned legal instruments  │
+│  kb/notes/           ← commentary & analysis        │
+│  kb/reference/       ← supporting materials         │
+│  kb/templates/       ← reusable working documents   │
+│  kb/_audit/          ← permanent ingest audit trail │
 └──────────────────────┬──────────────────────────────┘
                        │  kb validate → kb build-index
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│           DERIVED ARTIFACTS (build/)                 │
-│                                                      │
-│  SQLite search index · Manifest · Reports            │
-│  (always regenerable from kb/)                       │
+│           DERIVED ARTIFACTS (build/)                │
+│                                                     │
+│  SQLite search index · Manifest · Reports           │
+│  (always regenerable from kb/)                      │
 └─────────────────────────────────────────────────────┘
 ```
 
