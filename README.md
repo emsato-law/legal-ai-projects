@@ -63,7 +63,9 @@ Pipeline Steps                                        🤖 = AI-powered step
 ──────────────────────────────────────────────────
 
 Step 1 ─ Convert to Markdown
-           ├── DOCX and born-digital PDF → local extraction + layout classification
+           ├── DOCX and born-digital PDF →
+           │     ├── Local extraction + layout classification
+           │     └── Sensitive information anonymization (coming soon) 🤖
            ├── Scanned documents and images →
            │     ├── Sensitive information anonymization (coming soon) 🤖
            │     └── Cloud OCR 🤖
