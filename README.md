@@ -8,9 +8,9 @@ This repository documents the architecture, design decisions, and system flows b
 
 ---
 
-## At a Glance (for this portfolio)
+## Portfolio at a Glance
 
-| Metric | |
+| Metric | Detail |
 |---|---|
 | **Combined codebase** | 80,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
 | **Total commits** | 1,500+ across all projects |
