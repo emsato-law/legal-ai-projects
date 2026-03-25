@@ -25,7 +25,14 @@ This repository documents the architecture, design decisions, and system flows b
 ### [Translation Pipeline](./translation-pipeline/)
 **Structure-preserving AI translation pipeline for legal documents**
 
-Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs. Uses multi-model routing (separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning), language-aware prompt architecture, and anti-runaway chunking protection for documents that exceed token limits. Step 1 uses hybrid provider routing — born-digital PDFs go through native extraction with layout classification, while scanned documents and raster images route to Google Document AI Enterprise OCR. The pipeline is review-aware: rather than silently passing risky output, it emits structured findings identifying where human inspection is needed. Handles PDF, image, and public-webpage ingestion (with DOCX and URL inputs in testing), multi-stage structural correction, and export to DOCX, HTML, and PDF. Outputs are designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material for RAG.
+- **Multi-model routing** — separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning
+- **Language-aware prompt architecture** — specialized prompts where linguistically necessary (Thai, Bengali), generic prompts where not
+- **Anti-runaway chunking** — production-hardened protections against LLM content expansion and infinite recursion in long documents
+- **Hybrid extraction routing** — born-digital PDFs go through native extraction with page-level layout classification; scanned documents and raster images route to Google Document AI Enterprise OCR
+- **Review-aware output** — structured findings identify where human inspection is needed, rather than silently passing risky output
+- **Inputs:** PDF, images, public webpages (DOCX and URL inputs in testing)
+- **Outputs:** Markdown, DOCX, HTML, PDF
+- **Downstream integration:** outputs designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material for RAG
 
 <div align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
@@ -50,6 +57,36 @@ Production-oriented translation pipeline for long-form legal and regulatory docu
 </div>
 
 <p>&nbsp;</p>
+
+```
+Pipeline Steps
+──────────────────────────────────────────────────
+
+Step 1 ─ Convert to Markdown
+           ├── Born-digital PDF → native extraction + layout classification
+           ├── Scanned PDF / raster image → Google Document AI Enterprise OCR
+           ├── Public webpage URL → HTML extraction + Markdown conversion
+           └── DOCX / URL (testing) → direct ingestion
+
+Step 2 ─ Correct and Normalize
+           ├── OCR correction (language-aware)
+           ├── Table reconstruction
+           ├── Numbering validation (mixed numeral systems)
+           ├── Structural analysis → review findings
+           └── Text cleanup
+
+Step 3 ─ Translate
+           ├── Language-pair-specific prompt templates
+           ├── Critical-term preservation
+           ├── Deterministic substitutions
+           └── Post-translation review checks
+
+Step 4 ─ Export
+           ├── Markdown  ─┐
+           ├── DOCX       │→ with review signals carried forward
+           ├── HTML       │
+           └── PDF       ─┘
+```
 
 → [Architecture & Design](./translation-pipeline/README.md)
 
