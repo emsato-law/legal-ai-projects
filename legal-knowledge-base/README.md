@@ -18,6 +18,8 @@ Legal knowledge management is stuck between two bad options:
 
 Legal RAG needs a *legal-native ingestion layer* — one that understands document types, hierarchical structure, temporal relationships, jurisdictional scope, and bilingual instrument pairs before anything gets embedded. This system builds that layer.
 
+A planned upstream source is the [Translation Pipeline](../translation-pipeline/), which produces structure-corrected, translated legal documents in Markdown — the format this knowledge base expects. The goal is for translated output to flow directly into ingestion without manual reformatting.
+
 ---
 
 ## Architecture Overview
@@ -205,6 +207,7 @@ Because the current phase is structured retrieval — finding specific provision
 | Bilingual instrument handling | ✅ Operational |
 | Audit trail generation | ✅ Operational |
 | Editor support (VS Code schema + snippets) | ✅ Operational |
+| Automated ingestion from [Translation Pipeline](../translation-pipeline/) | 🔧 Planned |
 | Embedding generation | 🔧 Planned |
 | RAG retrieval layer | 🔧 Planned |
 | Semantic query interface | 📋 Planned |

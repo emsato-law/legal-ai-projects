@@ -65,7 +65,11 @@ The current live system is strongest on:
 - **Public HTML webpages**
 - **English hub translation flows**, especially **English ↔ Thai**
 
-Supported output formats include:
+Additional input formats in testing:
+
+- **DOCX uploads** and **URL inputs** — both in testing phase, aimed at faster input automation for documents already in editable formats
+
+Supported output formats:
 
 - Markdown
 - DOCX
@@ -90,7 +94,7 @@ Important limitations:
 
 ### Step 1: Convert to Markdown
 
-The system accepts uploaded PDFs, raster images, and public webpage URLs. Rather than using a single extraction path, Step 1 routes each input to the provider best suited to its characteristics:
+The system accepts uploaded PDFs, raster images, and public webpage URLs — with DOCX and URL inputs in testing for faster input automation. Rather than using a single extraction path, Step 1 routes each input to the provider best suited to its characteristics:
 
 - **Born-digital PDFs** (with local-safe languages) go through native text extraction with page-level layout classification. Each page is categorized — table, narrative, multi-column, graphic/diagram, or ambiguous — and the extraction strategy adjusts accordingly. A legal document with a narrative introduction, a tabular fee schedule, and a multi-column appendix gets appropriate handling for each section rather than a single strategy applied uniformly.
 - **Scanned PDFs, weak-text PDFs, and non-local-safe languages** route to Google Document AI Enterprise OCR for higher-fidelity extraction.
@@ -126,11 +130,14 @@ The goal is not just fluent output, but legally usable output with better consis
 
 Final output can be generated as:
 
+- Markdown (also the format expected by the Legal Knowledge Base for downstream ingestion)
 - DOCX
 - HTML
 - PDF
 
 When review signals matter, they can carry forward into the final output so the document itself makes clear that manual review is still required.
+
+The longer-term goal is for translation pipeline outputs to feed directly into the [Legal Knowledge Base](../legal-knowledge-base/) — translated and structure-corrected documents becoming ingestion-ready source material for the RAG layer without manual reformatting.
 
 ---
 

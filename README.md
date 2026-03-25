@@ -25,7 +25,7 @@ This repository documents the architecture, design decisions, and system flows b
 ### [Translation Pipeline](./translation-pipeline/)
 **Structure-preserving AI translation pipeline for legal documents**
 
-Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs. Uses multi-model routing (separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning), language-aware prompt architecture, and anti-runaway chunking protection for documents that exceed token limits. Step 1 uses hybrid provider routing — born-digital PDFs go through native extraction with layout classification, while scanned documents and raster images route to Google Document AI Enterprise OCR. The pipeline is review-aware: rather than silently passing risky output, it emits structured findings identifying where human inspection is needed. Handles PDF, image, and public-webpage ingestion, multi-stage structural correction, and export to DOCX, HTML, and PDF.
+Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs. Uses multi-model routing (separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning), language-aware prompt architecture, and anti-runaway chunking protection for documents that exceed token limits. Step 1 uses hybrid provider routing — born-digital PDFs go through native extraction with layout classification, while scanned documents and raster images route to Google Document AI Enterprise OCR. The pipeline is review-aware: rather than silently passing risky output, it emits structured findings identifying where human inspection is needed. Handles PDF, image, and public-webpage ingestion (with DOCX and URL inputs in testing), multi-stage structural correction, and export to DOCX, HTML, and PDF. Outputs are designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material for RAG.
 
 <div align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
@@ -75,7 +75,7 @@ OpenClaw connects LLM reasoning to a local execution runtime, enabling automated
 ### [Legal Knowledge Base](./legal-knowledge-base/)
 **Files-first ingestion system for legal RAG**
 
-Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system. Currently operational for document processing and structured storage; RAG retrieval layer is in active development.
+Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system. A planned upstream source is the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion. Currently operational for document processing and structured storage; RAG retrieval layer is in active development.
 
 → [Architecture & Design](./legal-knowledge-base/README.md)
 
