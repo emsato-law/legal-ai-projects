@@ -59,27 +59,29 @@ This repository documents the architecture, design decisions, and system flows b
 <p>&nbsp;</p>
 
 ```
-Pipeline Steps
+Pipeline Steps                                        🤖 = AI-powered step
 ──────────────────────────────────────────────────
 
 Step 1 ─ Convert to Markdown
-           ├── Born-digital PDF → native extraction + layout classification
-           ├── Scanned PDF / raster image → Google Document AI Enterprise OCR
+           ├── Born-digital PDF → local extraction + layout classification
+           ├── Scanned PDF / raster image → cloud OCR 🤖
            ├── Public webpage URL → HTML extraction + Markdown conversion
-           └── DOCX / URL (testing) → direct ingestion
+           ├── DOCX / URL (testing) → direct ingestion
+           └── Sensitive information anonymization (coming soon)
 
 Step 2 ─ Correct and Normalize
-           ├── OCR correction (language-aware)
-           ├── Table reconstruction
-           ├── Numbering validation (mixed numeral systems)
-           ├── Structural analysis → review findings
-           └── Text cleanup
+           ├── OCR correction, language-aware 🤖
+           ├── Table reconstruction 🤖
+           ├── Numbering validation, mixed numeral systems 🤖
+           ├── Structural analysis → review findings 🤖
+           └── Text cleanup 🤖
 
 Step 3 ─ Translate
-           ├── Language-pair-specific prompt templates
+           ├── Language-pair-specific prompt templates 🤖
            ├── Critical-term preservation
            ├── Deterministic substitutions
-           └── Post-translation review checks
+           ├── Post-translation review checks 🤖
+           └── Re-insert sensitive information (coming soon)
 
 Step 4 ─ Export
            ├── Markdown  ─┐
