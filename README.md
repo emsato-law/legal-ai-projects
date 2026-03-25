@@ -63,11 +63,11 @@ Pipeline Steps                                        🤖 = AI-powered step
 ──────────────────────────────────────────────────
 
 Step 1 ─ Convert to Markdown
-           ├── Sensitive information anonymization (coming soon)
-           ├── Born-digital PDF → local extraction + layout classification
-           ├── Scanned PDF / raster image → cloud OCR 🤖
-           ├── Public webpage URL → HTML extraction + Markdown conversion
-           └── DOCX / URL (testing) → direct ingestion
+           ├── Born-digital PDF/DOCX → local extraction + layout classification
+           ├── Scanned PDF/DOCX / raster image →
+           │     ├── Sensitive information anonymization (coming soon) 🤖
+           │     └── Cloud OCR 🤖
+           └── Public webpage URL → HTML extraction + Markdown conversion
 
 Step 2 ─ Correct and Normalize
            ├── OCR correction, language-aware 🤖
