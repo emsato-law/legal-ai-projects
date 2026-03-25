@@ -23,9 +23,9 @@ This repository documents the architecture, design decisions, and system flows b
 ## Projects
 
 ### [Translation Pipeline](./translation-pipeline/)
-**Fully automated legal document translation system**
+**Structure-preserving AI translation pipeline for legal documents**
 
-Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs, especially Thai, Vietnamese, Indonesian, and Malay. Handles PDF and public-webpage ingestion, structure-aware preprocessing, review-aware correction, and export to business-ready formats. Built for documents where precision matters more than fluency—statutes, regulations, and technical guidance that often arrive as complex PDFs and other difficult source formats.
+Production-oriented translation pipeline for long-form legal and regulatory documents across English-hub ASEAN language pairs. Uses multi-model routing (separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning), language-aware prompt architecture, and anti-runaway chunking protection for documents that exceed token limits. Step 1 uses hybrid provider routing — born-digital PDFs go through native extraction with layout classification, while scanned documents and raster images route to Google Document AI Enterprise OCR. The pipeline is review-aware: rather than silently passing risky output, it emits structured findings identifying where human inspection is needed. Handles PDF, image, and public-webpage ingestion, multi-stage structural correction, and export to DOCX, HTML, and PDF.
 
 <div align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
@@ -137,6 +137,8 @@ These systems share a common set of architectural principles:
 
 - **Deployment where it matters.** Production systems ship with full deployment pipelines. Smaller tools (Docx Styler, SHA-SG) are designed as local utilities — deployed to the environments where they're actually used.
 
+- **Review-aware over silently confident.** Legal output that looks correct but isn't is worse than output that flags its own uncertainty. These systems are designed to surface risk, not hide it — structured review findings, propagated warnings, and explicit "review required" signals are first-class features, not afterthoughts.
+
 ---
 
 ## About
@@ -147,4 +149,4 @@ For more: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.co
 
 ---
 
-*Last updated: 18 March 2026*
+*Last updated: 26 March 2026*

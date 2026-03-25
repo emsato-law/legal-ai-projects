@@ -90,26 +90,26 @@ Important limitations:
 
 ### Step 1: Convert to Markdown
 
-The system accepts uploaded PDFs and public webpage URLs.
+The system accepts uploaded PDFs, raster images, and public webpage URLs. Rather than using a single extraction path, Step 1 routes each input to the provider best suited to its characteristics:
 
-For PDFs, the current live path uses native text extraction first and falls back to OCR only when needed. For public webpages, the app extracts the main readable content and converts it to Markdown. Step 1 also adds review signals when the source appears risky, for example:
+- **Born-digital PDFs** (with local-safe languages) go through native text extraction with page-level layout classification. Each page is categorized — table, narrative, multi-column, graphic/diagram, or ambiguous — and the extraction strategy adjusts accordingly. A legal document with a narrative introduction, a tabular fee schedule, and a multi-column appendix gets appropriate handling for each section rather than a single strategy applied uniformly.
+- **Scanned PDFs, weak-text PDFs, and non-local-safe languages** route to Google Document AI Enterprise OCR for higher-fidelity extraction.
+- **Raster image uploads** (PNG, JPG, TIFF, etc.) route to Google Document AI Enterprise OCR.
+- **Public webpage URLs** go through HTML extraction and Markdown conversion.
 
-- scanned-page OCR
-- ambiguous layout
-- likely JavaScript-dependent or login-gated webpages
-- graphic-heavy or multi-column pages
+Both native extraction and Google Document AI surface review signals when layout fidelity is uncertain — scanned pages, ambiguous layout, graphic-heavy or multi-column content, and likely JavaScript-dependent or login-gated webpages are all flagged for downstream awareness.
 
 ### Step 2: Correct and Normalize
 
-This stage prepares the Markdown for translation by addressing:
+This is not a single AI call. Step 2 runs a multi-stage pipeline where each stage addresses a specific class of legal document damage:
 
-- OCR mistakes
-- table damage
-- numbering drift
-- footnote/endnote issues
-- structural cleanup
+1. **OCR Correction** — Repairs character-level errors from PDF extraction, with language-specific awareness (e.g., Thai script patterns, Bengali conjunct consonants)
+2. **Table Reconstruction** — Detects and repairs damaged table structures, including grid tables that survived extraction as partial fragments
+3. **Numbering Validation** — Verifies hierarchical clause numbering hasn't drifted, supporting mixed numeral systems (Thai ๑๒๓, Bengali ০১২, Arabic 123 in the same document)
+4. **Structural Analysis** — Emits structured review findings when the output shows signs of material loss: table damage, missing notes, numeral drift, or severe content shrinkage
+5. **Text Cleanup** — Language-aware final normalization
 
-It now also emits structured review findings when the output looks materially different from the source in ways that could matter legally.
+Each sub-stage is independently configurable and can be enabled or disabled per deployment. The processing is language-aware where it matters (Thai numerals, Bengali script) and universal where it doesn't (footnotes, numbering hierarchies).
 
 ### Step 3: Translate
 
@@ -134,17 +134,57 @@ When review signals matter, they can carry forward into the final output so the 
 
 ---
 
+## Model Routing
+
+The pipeline does not use a single model for everything. Each processing stage uses the model best suited to its constraints:
+
+- **Step 2 (Correction):** GPT-5-mini at temperature 0.0 — deterministic output for OCR repair, table reconstruction, and numbering validation where creativity is a liability
+- **Step 3 (Translation):** Gemini 2.5 Pro at temperature 0.1 — high token capacity (65K) for long legal documents with minimal creative drift
+- **Fallback translation:** Claude Sonnet 4 with reduced chunk sizes to accommodate its lower output ceiling (4K tokens)
+
+Token budgets, chunk sizes, and expansion ratios are tuned per provider and per language pair — a Thai→English translation under Gemini gets different chunking than the same pair under Claude.
+
+The temperature choices are legally motivated: OCR correction should never be creative, and translation should be as deterministic as possible while still reading naturally.
+
+---
+
+## Language-Aware Prompt Architecture
+
+Not every language gets a custom prompt. The pipeline distinguishes between languages that need specialized handling and those that don't:
+
+- **Thai and Bengali** use dedicated correction and translation prompts — Thai because of mixed numeral systems (Thai ๑๒๓ alongside Arabic 123, Buddhist Era dates), Bengali because of its own numerals and complex conjunct consonants
+- **Malay, Indonesian, and Vietnamese** use generic prompts because they share Latin script, Arabic numerals, and space-separated word boundaries with English — custom prompts would add cost without benefit
+
+This is a deliberate cost-benefit decision, not a gap. The prompt loading system automatically falls back to generic prompts when no language-specific variant exists.
+
+---
+
+## Chunking Safety
+
+Legal documents routinely exceed LLM token limits, so the pipeline splits them into chunks. But naive chunking creates a dangerous failure mode: when an LLM receives a small chunk, it can try to "complete" the document, generating massive repetitive content that triggers infinite re-splitting.
+
+The pipeline includes production-hardened protections against this:
+
+- **Dynamic instruction injection:** Single-chunk documents get full-document processing instructions; multi-chunk documents get explicit "process only this section" constraints
+- **Expansion detection:** Responses more than 3× larger than their input are flagged as bloated and discarded
+- **Recursion limits:** Maximum 2 levels of chunk splitting, preventing infinite loops
+- **Size-based protection:** Chunks below 1KB are never split further
+
+These protections were built in response to a real production incident where Bengali documents triggered 70× content expansion and infinite recursion.
+
+---
+
 ## Review-Aware Design
 
 One of the core ideas behind the project is that not every risky document should silently pass as “done.”
 
-Instead of pretending the pipeline is infallible, the system can mark a result as:
+Instead of pretending the pipeline is infallible, the system emits structured signals that identify *what* to inspect:
 
-- **review required**
-- accompanied by **warnings**
-- accompanied by **specific findings or targets to inspect**
+- **`review_targets`:** specific pages or sections flagged for human attention
+- **`review_findings`:** categorized issues such as likely table loss, note loss, numeral drift, or severe content shrinkage
+- **`warnings`:** contextual notes about source quality (e.g., scanned page, JavaScript-dependent webpage)
 
-That review information appears in the status UI and, where appropriate, in the final exported document.
+These signals are not just boolean flags. They propagate through every pipeline step and into the final exported document, so a reviewer receiving a translated DOCX knows not just *that* review is needed, but *where to look*.
 
 This is especially important for:
 
@@ -164,7 +204,10 @@ At a high level, the project is a web application backed by asynchronous process
 - **Task processing:** Celery-based step execution and orchestration
 - **Document conversion:** Pandoc plus custom formatting logic
 - **LLM providers:** provider and language pair-specific prompt paths for correction and translation
-- **Monitoring/admin:** task status UI, admin routes, health checks, and error monitoring
+- **Periodic maintenance:** automated stuck-task recovery, orphaned file cleanup, and database pruning via scheduled background tasks
+- **Admin dashboard:** production task monitoring, Celery worker management, file inspection, and debug analysis — with protected access
+- **Error monitoring:** Sentry integration for real-time error tracking across the web server, Celery workers, and pipeline orchestrator
+- **Three-tier logging:** user-facing logs in the dashboard UI, technical debug logs for developers, and infrastructure logs for operations — each with its own storage and audience
 
 ---
 
@@ -192,10 +235,7 @@ The strongest current coverage is:
 - born-digital legal/regulatory PDFs
 - English-hub translation flows
 - review-aware output for high-risk cases
-
-Planned improvements once the deployment moves to higher-spec infrastructure:
-
-- Full OCR support for scanned, layout-heavy, and multilingual documents (currently gated on the low-end server in use)
+- hybrid provider routing with Google Document AI Enterprise OCR for scanned documents and raster images
 
 ---
 
