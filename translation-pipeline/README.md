@@ -8,6 +8,28 @@
 
 ---
 
+## Table of Contents
+
+- [What This Project Is Solving](#what-this-project-is-solving)
+- [Architecture in Practice](#architecture-in-practice)
+  - [System Stack](#system-stack)
+  - [Current Product Shape](#current-product-shape)
+- [Pipeline Overview](#pipeline-overview)
+  - [Step 1: Convert to Markdown](#step-1-convert-to-markdown)
+  - [Step 2: Correct and Normalize](#step-2-correct-and-normalize)
+  - [Step 3: Translate](#step-3-translate)
+  - [Step 4: Export](#step-4-export)
+- [What Makes This Different](#what-makes-this-different)
+  - [Model Routing](#model-routing)
+  - [Language-Aware Prompt Architecture](#language-aware-prompt-architecture)
+  - [Chunking Safety](#chunking-safety)
+  - [Review-Aware Design](#review-aware-design)
+- [Status](#status)
+  - [Latest Developments](#latest-developments)
+  - [Future Developments](#future-developments)
+
+---
+
 ## What This Project Is Solving
 
 General-purpose translation tools can produce a usable rough draft, but fall short of professional standards when the output is client-facing. This system addresses the specific failure modes that matter in legal documents in this region:
@@ -22,7 +44,9 @@ This system is built to reduce those risks and to surface them when they cannot 
 
 ---
 
-## Screenshots
+## Architecture in Practice
+
+At a high level, the project is a web application backed by asynchronous processing:
 
 <div align="center">
   <img src="./screenshots/splash.png" alt="Translation Pipeline — Home" width="700">
@@ -48,9 +72,19 @@ This system is built to reduce those risks and to surface them when they cannot 
 
 <p>&nbsp;</p>
 
----
+### System Stack
 
-## Current Product Shape
+- **Frontend:** browser-based Advanced Mode and Quick Translation workflows
+- **Backend:** FastAPI
+- **Task processing:** Celery-based step execution and orchestration
+- **Document conversion:** Pandoc plus custom formatting logic
+- **LLM providers:** provider and language pair-specific prompt paths for correction and translation
+- **Periodic maintenance:** automated stuck-task recovery, orphaned file cleanup, and database pruning via scheduled background tasks
+- **Admin dashboard:** production task monitoring, Celery worker management, file inspection, and debug analysis — with protected access
+- **Error monitoring:** Sentry integration for real-time error tracking across the web server, Celery workers, and pipeline orchestrator
+- **Three-tier logging:** user-facing logs in the dashboard UI, technical debug logs for developers, and infrastructure logs for operations — each with its own storage and audience
+
+### Current Product Shape
 
 ```
 Inputs                         Languages                      Outputs
@@ -170,7 +204,7 @@ These protections were built in response to a real production incident where Ben
 
 ### Review-Aware Design
 
-One of the core ideas behind the project is that not every risky document should silently pass as “done.”
+One of the core ideas behind the project is that not every risky document should silently pass as "done."
 
 Instead of pretending the pipeline is infallible, the system emits structured signals that identify *what* to inspect:
 
@@ -189,32 +223,16 @@ This is especially important for:
 
 ---
 
-## Architecture in Practice
-
-At a high level, the project is a web application backed by asynchronous processing:
-
-- **Frontend:** browser-based Advanced Mode and Quick Translation workflows
-- **Backend:** FastAPI
-- **Task processing:** Celery-based step execution and orchestration
-- **Document conversion:** Pandoc plus custom formatting logic
-- **LLM providers:** provider and language pair-specific prompt paths for correction and translation
-- **Periodic maintenance:** automated stuck-task recovery, orphaned file cleanup, and database pruning via scheduled background tasks
-- **Admin dashboard:** production task monitoring, Celery worker management, file inspection, and debug analysis — with protected access
-- **Error monitoring:** Sentry integration for real-time error tracking across the web server, Celery workers, and pipeline orchestrator
-- **Three-tier logging:** user-facing logs in the dashboard UI, technical debug logs for developers, and infrastructure logs for operations — each with its own storage and audience
-
----
-
 ## Status
 
 This is an active production system, in daily use for the builder's legal practice.
 
-### Latest developments
+### Latest Developments
 
 - Review-aware output for high-risk cases — structured findings that identify where human inspection is needed
 - Hybrid provider routing with cloud OCR for scanned documents and raster images
 
-### Future developments
+### Future Developments
 
 - Sensitive information anonymization before cloud OCR and LLM processing
 - Expanded production testing across all supported language pairs
