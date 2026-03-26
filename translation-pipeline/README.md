@@ -59,24 +59,21 @@ This pipeline is built to reduce those risks and to surface them when they canno
 
 ## Current Product Shape
 
-The current live system is strongest on:
+```
+Inputs                         Languages                      Outputs
+─────────────────────          ─────────────────────          ─────────────────────
+DOCX                           English ↔ Thai (most mature)   Markdown
+Born-digital PDF               English ↔ Indonesian           DOCX
+Scanned PDF                    English ↔ Malay                HTML
+Raster images (PNG, JPG, etc.) English ↔ Vietnamese           PDF
+Public webpage URLs            English ↔ Simplified Chinese
+                               English ↔ Bengali      ┐
+                               English ↔ Lao          │
+                               English ↔ Khmer        ├ under review
+                               English ↔ Burmese      ┘
+```
 
-- **DOCX and born-digital PDFs**
-- **Public HTML webpages**
-- **English hub translation flows**, especially **English ↔ Thai**
-
-Supported output formats:
-
-- Markdown
-- DOCX
-- HTML
-- PDF
-
-Current language status:
-
-- **Most mature:** English ↔ Thai
-- **Also supported in the live app:** English ↔ Indonesian, Malay, Vietnamese, Simplified Chinese
-- **Still under review:** Bengali, Lao, Khmer, Burmese
+All language pairs use English as the hub language. English ↔ Thai is the most mature pair with the deepest prompt tuning and production usage. Indonesian, Malay, Vietnamese, and Simplified Chinese are live in production. Bengali, Lao, Khmer, and Burmese are functional but still under review for production readiness.
 
 Important limitations:
 
