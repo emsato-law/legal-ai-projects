@@ -96,6 +96,15 @@ Step 4 ─ Export
 
 ---
 
+### [Legal Knowledge Base](./legal-knowledge-base/)
+**Files-first ingestion system for legal RAG**
+
+Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system. A planned upstream source is the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion. Currently operational for document processing and structured storage; RAG retrieval layer is in active development.
+
+→ [Architecture & Design](./legal-knowledge-base/README.md)
+
+---
+
 ### [OpenClaw Harness](./openclaw-harness/)
 **LLM-to-OS bridge for local task execution**
 
@@ -110,15 +119,6 @@ OpenClaw connects LLM reasoning to a local execution runtime, enabling automated
 <p>&nbsp;</p>
 
 → [Architecture & Design](./openclaw-harness/README.md)
-
----
-
-### [Legal Knowledge Base](./legal-knowledge-base/)
-**Files-first ingestion system for legal RAG**
-
-Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system. A planned upstream source is the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion. Currently operational for document processing and structured storage; RAG retrieval layer is in active development.
-
-→ [Architecture & Design](./legal-knowledge-base/README.md)
 
 ---
 
