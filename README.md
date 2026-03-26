@@ -175,7 +175,7 @@ Applies consistent paragraph-level styling to legal Word documents using AI clas
 ---
 
 ### [SHA-SG](./sha-sg/)
-**Singapore venture capital templates under version control** · *Complete*
+**Singapore venture capital templates under version control** · *In use*
 
 Places standard Singapore law venture capital template agreements (shareholders' agreement, subscription agreement, constitution) into structured version control. Tracks clause-level changes across template revisions and enables diffing between template versions.
 
@@ -187,15 +187,13 @@ Places standard Singapore law venture capital template agreements (shareholders'
 
 These systems share a common set of architectural principles:
 
-- **Direct API integration over frameworks.** No LangChain, no LlamaIndex. Every LLM call is a deliberate, auditable API call with custom prompt management. This trades convenience for control — essential when outputs carry legal consequences.
+- **Direct API integration over frameworks.** No LangChain, no LlamaIndex. Every LLM call is a deliberate, auditable API call with custom prompt management — essential when outputs carry legal consequences.
 
-- **Model routing by task complexity.** Lightweight models handle routine extraction and classification. Capable models handle reasoning, drafting, and ambiguous interpretation. Cost and latency stay proportional to difficulty.
+- **Model routing by task complexity.** Lightweight models handle routine extraction and classification. Capable models handle reasoning, drafting, and ambiguous interpretation. Cost and speed stay proportional to difficulty.
 
-- **Legal-native data models.** Document structures, metadata schemas, and output formats are designed around how lawyers actually work — not retrofitted from general-purpose AI tooling.
+- **Legal-native data models.** Clause hierarchies, numbered sections, mixed numeral systems, and bilingual instrument pairs are modeled as first-class structures, not flattened into plain text.
 
-- **Deployment where it matters.** Production systems ship with full deployment pipelines. Smaller tools (Docx Styler, SHA-SG) are designed as local utilities — deployed to the environments where they're actually used.
-
-- **Review-aware over silently confident.** Legal output that looks correct but isn't is worse than output that flags its own uncertainty. These systems are designed to surface risk, not hide it — structured review findings, propagated warnings, and explicit "review required" signals are first-class features, not afterthoughts.
+- **Review-aware over silently confident.** Output that looks correct but has hidden defects is a serious risk for legal work. These systems surface uncertainty rather than hide it — structured review findings and explicit warnings are first-class features.
 
 ---
 
