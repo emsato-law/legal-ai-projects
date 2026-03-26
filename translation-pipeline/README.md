@@ -61,13 +61,9 @@ This pipeline is built to reduce those risks and to surface them when they canno
 
 The current live system is strongest on:
 
-- **Born-digital PDFs**
+- **DOCX and born-digital PDFs**
 - **Public HTML webpages**
 - **English hub translation flows**, especially **English ↔ Thai**
-
-Additional input formats in testing:
-
-- **DOCX uploads** and **URL inputs** — both in testing phase, aimed at faster input automation for documents already in editable formats
 
 Supported output formats:
 
@@ -94,12 +90,13 @@ Important limitations:
 
 ### Step 1: Convert to Markdown
 
-The system accepts uploaded PDFs, raster images, and public webpage URLs — with DOCX and URL inputs in testing for faster input automation. Rather than using a single extraction path, Step 1 routes each input to the provider best suited to its characteristics:
+The system accepts uploaded documents, images, and public webpage URLs. Rather than using a single extraction path, Step 1 routes each input to the provider best suited to its characteristics:
 
-- **Born-digital PDFs** (with local-safe languages) go through native text extraction with page-level layout classification. Each page is categorized — table, narrative, multi-column, graphic/diagram, or ambiguous — and the extraction strategy adjusts accordingly. A legal document with a narrative introduction, a tabular fee schedule, and a multi-column appendix gets appropriate handling for each section rather than a single strategy applied uniformly.
-- **Scanned PDFs, weak-text PDFs, and non-local-safe languages** route to Google Document AI Enterprise OCR for higher-fidelity extraction.
-- **Raster image uploads** (PNG, JPG, TIFF, etc.) route to Google Document AI Enterprise OCR.
+- **DOCX and born-digital PDFs** (with local-safe languages) go through local text extraction with page-level layout classification. Each page is categorized — table, narrative, multi-column, graphic/diagram, or ambiguous — and the extraction strategy adjusts accordingly. A legal document with a narrative introduction, a tabular fee schedule, and a multi-column appendix gets appropriate handling for each section rather than a single strategy applied uniformly.
+- **Scanned documents and images** (scanned PDFs, weak-text PDFs, non-local-safe languages, raster image uploads) route to cloud OCR for higher-fidelity extraction.
 - **Public webpage URLs** go through HTML extraction and Markdown conversion.
+
+A planned addition to Step 1 is **sensitive information anonymization** — stripping personally identifiable and confidential content before documents are sent to cloud OCR or downstream LLM-powered steps. This ensures sensitive information never leaves the local machine. Anonymized content is re-inserted after translation in Step 3.
 
 Both native extraction and Google Document AI surface review signals when layout fidelity is uncertain — scanned pages, ambiguous layout, graphic-heavy or multi-column content, and likely JavaScript-dependent or login-gated webpages are all flagged for downstream awareness.
 
@@ -123,6 +120,7 @@ Translation is not treated as a single blind pass. The pipeline applies:
 - critical-term preservation
 - deterministic substitutions where needed
 - post-translation review checks
+- re-insertion of sensitive information (planned — corresponding to the anonymization step in Step 1)
 
 The goal is not just fluent output, but legally usable output with better consistency across a full document.
 
