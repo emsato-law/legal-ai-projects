@@ -1,10 +1,8 @@
 # Legal AI Projects
 
-System architectures and design documentation for legal AI tools built for real-world legal practice — regulatory knowledge systems, workflow automation, and retrieval-augmented generation (RAG) pipelines.
+Legal AI tools built for real-world practice across ASEAN jurisdictions.
 
-**Built by a U.S.-qualified technology lawyer working across ASEAN jurisdictions.**
-
-This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools currently in production or active development. Source code is maintained in private repositories. What follows is the engineering reasoning — the *why* and *how* behind each system.
+This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools currently in production or active development. Source code is maintained in private repositories; what follows is the engineering reasoning behind each system.
 
 ---
 
