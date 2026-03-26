@@ -130,7 +130,11 @@ The longer-term goal is for translation pipeline outputs to feed directly into t
 
 ---
 
-## Model Routing
+## What Makes This Different
+
+The system is not a translation API wrapper. It corrects document damage before translating, routes each task to the right model, and tells reviewers exactly where to look when output cannot be fully trusted.
+
+### Model Routing
 
 The pipeline does not use a single model for everything. Each processing stage uses the model best suited to its constraints:
 
@@ -142,9 +146,7 @@ Token budgets, chunk sizes, and expansion ratios are tuned per provider and per 
 
 The temperature choices are legally motivated: OCR correction should never be creative, and translation should be as deterministic as possible while still reading naturally.
 
----
-
-## Language-Aware Prompt Architecture
+### Language-Aware Prompt Architecture
 
 Not every language gets a custom prompt. The pipeline distinguishes between languages that need specialized handling and those that don't:
 
@@ -153,9 +155,7 @@ Not every language gets a custom prompt. The pipeline distinguishes between lang
 
 This is a deliberate cost-benefit decision, not a gap. The prompt loading system automatically falls back to generic prompts when no language-specific variant exists.
 
----
-
-## Chunking Safety
+### Chunking Safety
 
 Legal documents routinely exceed LLM token limits, so the pipeline splits them into chunks. But naive chunking creates a dangerous failure mode: when an LLM receives a small chunk, it can try to "complete" the document, generating massive repetitive content that triggers infinite re-splitting.
 
@@ -168,9 +168,7 @@ The pipeline includes production-hardened protections against this:
 
 These protections were built in response to a real production incident where Bengali documents triggered 70× content expansion and infinite recursion.
 
----
-
-## Review-Aware Design
+### Review-Aware Design
 
 One of the core ideas behind the project is that not every risky document should silently pass as “done.”
 
@@ -204,21 +202,6 @@ At a high level, the project is a web application backed by asynchronous process
 - **Admin dashboard:** production task monitoring, Celery worker management, file inspection, and debug analysis — with protected access
 - **Error monitoring:** Sentry integration for real-time error tracking across the web server, Celery workers, and pipeline orchestrator
 - **Three-tier logging:** user-facing logs in the dashboard UI, technical debug logs for developers, and infrastructure logs for operations — each with its own storage and audience
-
----
-
-## Why This Is Different from a Generic Translation Wrapper
-
-This project is not just “upload a file, call an API, return text.”
-
-The pipeline adds value in the areas that matter most for legal and regulatory documents:
-
-- preserving structure before translation
-- correcting OCR and layout issues before they become translation errors
-- carrying review signals through the pipeline
-- producing final deliverables in business-ready formats
-
-The real differentiator is not that it eliminates all review. It is that it tries to preserve the parts of legal documents that are easiest to damage, and it signals clearly when the output should not be trusted without inspection.
 
 ---
 
