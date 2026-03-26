@@ -75,12 +75,6 @@ Public webpage URLs            English ↔ Simplified Chinese
 
 All language pairs use English as the hub language. English ↔ Thai is the most mature pair with the deepest prompt tuning and production usage.
 
-Important limitations:
-
-- **Scanned PDFs are deployment-dependent.** On lower-tier servers they may be gated off or flagged for manual review.
-- **Complex layouts still need review.** Tables, diagrams, footnotes, and multi-column pages are much better handled than before, but they are still not risk-free.
-- **URL input is for public webpages, not full website crawling.** The app can extract a page, and for some homepage-style URLs it may follow a small number of same-site links, but it does not guarantee full multi-page website coverage.
-
 ---
 
 ## Pipeline Overview
