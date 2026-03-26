@@ -1,15 +1,24 @@
 # Translation Pipeline
 
-**AI-assisted legal and regulatory document translation workflow**
+**AI-assisted legal and regulatory document translation system**
 
-This project is a production-oriented translation pipeline for long-form legal and regulatory documents. It is designed for cases where ordinary machine translation is not enough because the document structure matters as much as the wording: numbered clauses, tables, notes, headings, cross-references, and formatting all need to survive the workflow.
+A production-oriented translation system for long-form legal and regulatory documents. General-purpose translation tools often perform well enough for a user's internal gist, but fall short for client-facing work output:
+
+- Long documents — especially scanned ones — cause AI models to summarize, hallucinate, or fail outright
+- Key legal terms are translated inconsistently across a long document
+- Poor performance or lack of support for low-resource languages
+- Output cannot be trusted without review, but provides no guidance on where to look
+- Tables, charts, and footnotes are not handled well
+- Clause numbering becomes inconsistent
+
+This system is built to reduce those risks and to surface them when they cannot be fully resolved automatically.
 
 The system is built around a 4-step pipeline:
 
 1. **Convert** source material into Markdown
 2. **Correct** OCR and structural issues
 3. **Translate** with language-pair-specific prompts and term handling
-4. **Export** to final formats such as DOCX, HTML, and PDF
+4. **Export** to final formats such as Markdown, DOCX, HTML, and PDF
 
 **Live app (development server):** [dev.translation.legal](https://dev.translation.legal)
 
@@ -40,20 +49,6 @@ The system is built around a 4-step pipeline:
 </div>
 
 <p>&nbsp;</p>
-
----
-
-## What This Project Is Solving
-
-General-purpose translation tools often perform reasonably well on short text, but legal documents introduce a different class of problems:
-
-- Clause numbering can drift or flatten
-- Tables can collapse into plain prose
-- Notes and cross-references can move or disappear
-- Key legal terms can be translated inconsistently across a long document
-- OCR noise can silently propagate into the final output
-
-This pipeline is built to reduce those risks and to surface them when they cannot be fully resolved automatically.
 
 ---
 
