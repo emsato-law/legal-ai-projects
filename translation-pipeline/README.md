@@ -1,15 +1,22 @@
 # Translation Pipeline
 
-**AI-assisted legal and regulatory document translation system**
+**A complete AI-assisted system built specifically for legal and regulatory document translation**
 
-A production-oriented translation system for long-form legal and regulatory documents. General-purpose translation tools often perform well enough for a user's internal gist, but fall short for client-facing work output:
+---
 
-- Long documents — especially scanned ones — cause AI models to summarize, hallucinate, or fail outright
+**Live app (development server):** [dev.translation.legal](https://dev.translation.legal)
+
+---
+
+## What This Project Is Solving
+
+General-purpose translation tools can produce a usable rough draft, but fall short of professional standards when the output is client-facing. This system addresses the specific failure modes that matter in legal documents in this region:
+
+- Long documents, especially scanned ones, cause AI models to summarize, hallucinate, or fail outright
 - Key legal terms are translated inconsistently across a long document
 - Poor performance or lack of support for low-resource languages
 - Output cannot be trusted without review, but provides no guidance on where to look
-- Tables, charts, and footnotes are not handled well
-- Clause numbering becomes inconsistent
+- Document structure (clause numbering, tables, charts, footnotes, cross-references) is poorly preserved or silently lost
 
 This system is built to reduce those risks and to surface them when they cannot be fully resolved automatically.
 
@@ -19,8 +26,6 @@ The system is built around a 4-step pipeline:
 2. **Correct** OCR and structural issues
 3. **Translate** with language-pair-specific prompts and term handling
 4. **Export** to final formats such as Markdown, DOCX, HTML, and PDF
-
-**Live app (development server):** [dev.translation.legal](https://dev.translation.legal)
 
 ---
 
