@@ -230,14 +230,17 @@ The real differentiator is not that it eliminates all review. It is that it trie
 
 ## Status
 
-This is an active production project, not a finished research artifact.
+This is an active production system, in daily use for the builder's legal practice.
 
-The strongest current coverage is:
+### Latest developments
 
-- born-digital legal/regulatory PDFs
-- English-hub translation flows
-- review-aware output for high-risk cases
-- hybrid provider routing with Google Document AI Enterprise OCR for scanned documents and raster images
+- Review-aware output for high-risk cases — structured findings that identify where human inspection is needed
+- Hybrid provider routing with cloud OCR for scanned documents and raster images
+
+### Future developments
+
+- Sensitive information anonymization before cloud OCR and LLM processing
+- On-the-ground testing for Bengali, Lao, Khmer, and Burmese language pairs
 
 ---
 
