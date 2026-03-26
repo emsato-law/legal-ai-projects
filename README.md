@@ -2,7 +2,7 @@
 
 Legal AI tools built for real-world practice across ASEAN jurisdictions.
 
-This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools currently in production or active development. Source code is maintained in private repositories; what follows is the engineering reasoning behind each system.
+This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools. Source code is maintained in private repositories; what follows is the engineering reasoning behind each system.
 
 ---
 
@@ -37,7 +37,7 @@ This repository documents the architecture, design decisions, and system flows b
 ## Projects
 
 ### [Translation Pipeline](./translation-pipeline/)
-**A complete AI-assisted system built specifically for legal and regulatory document translation**
+**A complete AI-assisted system built specifically for legal and regulatory document translation** · *In active use*
 
 - **Multi-model routing** — separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning
 - **Language-aware prompt architecture** — specialized prompts where linguistically necessary (Thai, Bengali), generic prompts where not
@@ -111,7 +111,7 @@ Step 4 ─ Export
 ---
 
 ### [Legal Knowledge Base](./legal-knowledge-base/)
-**Files-first ingestion system for legal RAG**
+**Files-first ingestion system for legal RAG** · *In active development*
 
 Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system.
 
@@ -123,7 +123,7 @@ Ingestion and chunking pipeline for primary legal regulations, secondary legal r
 ---
 
 ### [OpenClaw Harness](./openclaw-harness/)
-**LLM-to-OS bridge for local task execution**
+**LLM-to-OS bridge for local task execution** · *In active use*
 
 OpenClaw connects LLM reasoning to a local execution runtime, enabling automated task execution through filesystem operations, shell commands, application control, and network requests. This deployment integrates multiple models (MiniMax 2.5 Pro for routine operations, Claude Sonnet for complex reasoning) with explicit routing logic. LobsterBoard provides the operational dashboard for managing mini-apps, scheduled jobs, monitoring execution, and system analytics.
 
@@ -140,7 +140,7 @@ OpenClaw connects LLM reasoning to a local execution runtime, enabling automated
 ---
 
 ### [Automated Research Pipelines](./automated-research-pipelines/)
-**Scheduled AI-driven research, summarization, and distribution**
+**Scheduled AI-driven research, summarization, and distribution** · *In active use*
 
 A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipeline spawns an isolated agent session, performs targeted web research, produces LLM-generated summaries, and distributes results to Discord channels and dashboards. Currently runs daily news briefings and an AI legal tech jobs/funding tracker.
 
@@ -157,7 +157,7 @@ A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipel
 ---
 
 ### [Fee Proposal Generator](./fee-proposal-generator/)
-**Automated fee proposal drafting for legal engagements**
+**Automated fee proposal drafting for legal engagements** · *Retired — replaced by firm-wide legal AI platform*
 
 Generates structured fee proposals from intake parameters — scope, personnel, billing/deposit requirements. Reduces a 2–3 hour manual drafting process to minutes while maintaining firm-specific formatting and compliance with engagement standards.
 
@@ -166,7 +166,7 @@ Generates structured fee proposals from intake parameters — scope, personnel, 
 ---
 
 ### [Docx Styler](./docx-styler/)
-**AI-driven paragraph styling for Word documents**
+**AI-driven paragraph styling for Word documents** · *Retired — replaced by firm-wide legal AI platform*
 
 Applies consistent paragraph-level styling to legal Word documents using AI classification. Addresses the endemic problem of inconsistent formatting in documents that pass through multiple hands — associates, partners, clients, opposing counsel — before final production.
 
@@ -175,7 +175,7 @@ Applies consistent paragraph-level styling to legal Word documents using AI clas
 ---
 
 ### [SHA-SG](./sha-sg/)
-**Singapore venture capital templates under version control**
+**Singapore venture capital templates under version control** · *Complete*
 
 Places standard Singapore law venture capital template agreements (shareholders' agreement, subscription agreement, constitution) into structured version control. Tracks clause-level changes across template revisions and enables diffing between template versions.
 
