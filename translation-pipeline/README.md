@@ -12,11 +12,11 @@
 
 General-purpose translation tools can produce a usable rough draft, but fall short of professional standards when the output is client-facing. This system addresses the specific failure modes that matter in legal documents in this region:
 
-- Long documents, especially scanned ones, cause AI models to summarize, hallucinate, or fail outright
-- Key legal terms are translated inconsistently across a long document
-- Poor performance or lack of support for low-resource languages
-- Output cannot be trusted without review, but provides no guidance on where to look
-- Document structure (clause numbering, tables, charts, footnotes, cross-references) is poorly preserved or silently lost
+- **Long documents** — General AI translation tools may summarize, hallucinate, or fail outright, especially with scanned PDFs
+- **Term consistency** — Key legal terms are translated differently across a long document, undermining precision
+- **Low-resource languages** — Poor performance or no support for regional languages common in ASEAN legal work
+- **Blind output** — Results cannot be trusted without review, but provide no guidance on where to look
+- **Document structure** — Clause numbering, tables, charts, footnotes, and cross-references are poorly preserved or silently lost
 
 This system is built to reduce those risks and to surface them when they cannot be fully resolved automatically.
 
