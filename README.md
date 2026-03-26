@@ -23,14 +23,14 @@ This repository documents the architecture, design decisions, and system flows b
 ## Projects
 
 ### [Translation Pipeline](./translation-pipeline/)
-**Structure-preserving AI translation pipeline for legal documents**
+**A complete AI-assisted system built specifically for legal and regulatory document translation**
 
 - **Multi-model routing** — separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning
 - **Language-aware prompt architecture** — specialized prompts where linguistically necessary (Thai, Bengali), generic prompts where not
 - **Anti-runaway chunking** — production-hardened protections against LLM content expansion and infinite recursion in long documents
-- **Hybrid extraction routing** — born-digital PDFs go through native extraction with page-level layout classification; scanned documents and raster images route to Google Document AI Enterprise OCR
+- **Hybrid extraction routing** — born-digital PDFs go through native extraction with page-level layout classification; scanned documents and raster images route to cloud OCR
 - **Review-aware output** — structured findings identify where human inspection is needed, rather than silently passing risky output
-- **Inputs:** PDF, images, public webpages (DOCX and URL inputs in testing)
+- **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF
 - **Downstream integration:** outputs designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material for RAG
 
@@ -99,7 +99,10 @@ Step 4 ─ Export
 ### [Legal Knowledge Base](./legal-knowledge-base/)
 **Files-first ingestion system for legal RAG**
 
-Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system. A planned upstream source is the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion. Currently operational for document processing and structured storage; RAG retrieval layer is in active development.
+Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system.
+
+- **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion
+- **Current status:** operational for document processing and structured storage; RAG retrieval layer is in active development
 
 → [Architecture & Design](./legal-knowledge-base/README.md)
 
