@@ -67,13 +67,13 @@ Born-digital PDF               English ↔ Indonesian           DOCX
 Scanned PDF                    English ↔ Malay                HTML
 Raster images (PNG, JPG, etc.) English ↔ Vietnamese           PDF
 Public webpage URLs            English ↔ Simplified Chinese
-                               English ↔ Bengali      ┐
-                               English ↔ Lao          │
-                               English ↔ Khmer        ├ under review
-                               English ↔ Burmese      ┘
+                               English ↔ Bengali
+                               English ↔ Lao
+                               English ↔ Khmer
+                               English ↔ Burmese
 ```
 
-All language pairs use English as the hub language. English ↔ Thai is the most mature pair with the deepest prompt tuning and production usage. Indonesian, Malay, Vietnamese, and Simplified Chinese are live in production. Bengali, Lao, Khmer, and Burmese are functional but still under review for production readiness.
+All language pairs use English as the hub language. English ↔ Thai is the most mature pair with the deepest prompt tuning and production usage.
 
 Important limitations:
 
@@ -240,7 +240,7 @@ This is an active production system, in daily use for the builder's legal practi
 ### Future developments
 
 - Sensitive information anonymization before cloud OCR and LLM processing
-- On-the-ground testing for Bengali, Lao, Khmer, and Burmese language pairs
+- Expanded production testing across all supported language pairs
 
 ---
 
