@@ -8,6 +8,22 @@ This repository documents the architecture, design decisions, and system flows b
 
 ---
 
+## Table of Contents
+
+- [Portfolio at a Glance](#portfolio-at-a-glance)
+- [Projects](#projects)
+  - [Translation Pipeline](#translation-pipeline)
+  - [Legal Knowledge Base](#legal-knowledge-base)
+  - [OpenClaw Harness](#openclaw-harness)
+  - [Automated Research Pipelines](#automated-research-pipelines)
+  - [Fee Proposal Generator](#fee-proposal-generator)
+  - [Docx Styler](#docx-styler)
+  - [SHA-SG](#sha-sg)
+- [Design Philosophy](#design-philosophy)
+- [About](#about)
+
+---
+
 ## Portfolio at a Glance
 
 | Metric | Detail |
