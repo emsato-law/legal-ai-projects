@@ -20,13 +20,6 @@ General-purpose translation tools can produce a usable rough draft, but fall sho
 
 This system is built to reduce those risks and to surface them when they cannot be fully resolved automatically.
 
-The system is built around a 4-step pipeline:
-
-1. **Convert** source material into Markdown
-2. **Correct** OCR and structural issues
-3. **Translate** with language-pair-specific prompts and term handling
-4. **Export** to final formats such as Markdown, DOCX, HTML, and PDF
-
 ---
 
 ## Screenshots
@@ -78,6 +71,13 @@ All language pairs use English as the hub language. English ↔ Thai is the most
 ---
 
 ## Pipeline Overview
+
+The system is built around a 4-step pipeline:
+
+1. **Convert** source material into Markdown
+2. **Correct** OCR and structural issues
+3. **Translate** with language-pair-specific prompts and term handling
+4. **Export** to final formats such as Markdown, DOCX, HTML, and PDF
 
 ### Step 1: Convert to Markdown
 
