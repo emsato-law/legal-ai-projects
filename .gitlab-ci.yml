@@ -5,5 +5,5 @@ mirror-to-github:
   script:
     - git clone --mirror "$CI_REPOSITORY_URL" repo.git
     - cd repo.git
-    - git remote add github "https://emsato-law:${GITHUB_PAT}@github.com/emsato-law/legal-ai-projects.git"
+    - git remote add github "https://x-access-token:${GITHUB_PAT}@github.com/emsato-law/legal-ai-projects.git"
     - git push github --mirror --force
