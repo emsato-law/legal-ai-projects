@@ -8,6 +8,24 @@ A CLI-driven knowledge base system that transforms primary legal regulations, se
 
 ---
 
+## UI Screenshots
+
+<div align="center">
+  <img src="./screenshots/splash.png" alt="AI-Assisted KB Ingest" width="700">
+  <br><em>AI-Assisted KB Ingest — upload a single note/reference/template or stage a primary-law family draft</em>
+  <br><sub>As of 26 March 2026</sub>
+</div>
+
+<p>&nbsp;</p>
+
+<div align="center">
+  <img src="./screenshots/suggested_meta.png" alt="Review Draft screen with AI-suggested metadata" width="700">
+  <br><em>Review Draft — inspect model usage, review proposed metadata, refresh suggestions, and confirm ingest</em>
+  <br><sub>As of 26 March 2026</sub>
+</div>
+
+---
+
 ## Problem
 
 Legal knowledge management is stuck between two bad options:

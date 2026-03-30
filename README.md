@@ -125,6 +125,22 @@ Ingestion and chunking pipeline for primary legal regulations, secondary legal r
 - **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion
 - **Current status:** operational for document processing and structured storage; RAG retrieval layer is in active development
 
+<div align="center">
+  <img src="./legal-knowledge-base/screenshots/splash.png" alt="Legal Knowledge Base — AI-Assisted KB Ingest" width="600">
+  <br><em>AI-Assisted KB Ingest — single-file and primary-law family intake</em>
+  <br><sub>As of 26 March 2026</sub>
+</div>
+
+<p>&nbsp;</p>
+
+<div align="center">
+  <img src="./legal-knowledge-base/screenshots/suggested_meta.png" alt="Legal Knowledge Base — Review Draft" width="600">
+  <br><em>Review Draft — human review interface with AI-suggested metadata refinements</em>
+  <br><sub>As of 26 March 2026</sub>
+</div>
+
+<p>&nbsp;</p>
+
 → [Architecture & Design](./legal-knowledge-base/README.md)
 
 ---
