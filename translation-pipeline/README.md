@@ -19,10 +19,13 @@
   - [Step 2: Correct and Normalize](#step-2-correct-and-normalize)
   - [Step 3: Translate](#step-3-translate)
   - [Step 4: Export](#step-4-export)
+  - [Partner API](#partner-api)
 - [What Makes This Different](#what-makes-this-different)
   - [Model Routing](#model-routing)
   - [Language-Aware Prompt Architecture](#language-aware-prompt-architecture)
   - [Chunking Safety](#chunking-safety)
+  - [Large Document Handling](#large-document-handling)
+  - [Quality Testing Infrastructure](#quality-testing-infrastructure)
   - [Review-Aware Design](#review-aware-design)
 - [Status](#status)
   - [Latest Developments](#latest-developments)
@@ -75,14 +78,18 @@ At a high level, the project is a web application backed by asynchronous process
 ### System Stack
 
 - **Frontend:** browser-based Advanced Mode and Quick Translation workflows
-- **Backend:** FastAPI
-- **Task processing:** Celery-based step execution and orchestration
-- **Document conversion:** Pandoc plus custom formatting logic
-- **LLM providers:** provider and language pair-specific prompt paths for correction and translation
+- **Backend:** FastAPI with SQLite for status tracking and task logs
+- **Task processing:** Celery workers + Beat scheduler + pipeline orchestrator (separate service)
+- **Message broker:** Redis
+- **Document conversion:** Pandoc with tiered memory limits and graduated timeouts
+- **LLM providers:** Gemini 2.5 Pro, GPT-5-mini, Claude Sonnet 4 — provider and language pair-specific prompt paths
+- **Partner API:** REST API (`/api/v1/`) with bearer-token auth, webhook delivery, idempotency, and per-partner rate and concurrency limits
 - **Periodic maintenance:** automated stuck-task recovery, orphaned file cleanup, and database pruning via scheduled background tasks
 - **Admin dashboard:** production task monitoring, Celery worker management, file inspection, and debug analysis — with protected access
 - **Error monitoring:** Sentry integration for real-time error tracking across the web server, Celery workers, and pipeline orchestrator
 - **Three-tier logging:** user-facing logs in the dashboard UI, technical debug logs for developers, and infrastructure logs for operations — each with its own storage and audience
+- **Deployment:** config sync with checksum validation and rollback capability, cache busting with CSS bundling, strict venv rebuild option
+- **Server security:** UFW firewall, fail2ban, content-aware upload validation, app-local rate limiting on upload endpoints
 
 ### Current Product Shape
 
@@ -118,7 +125,7 @@ The system is built around a 4-step pipeline:
 The system accepts uploaded documents, images, and public webpage URLs. Rather than using a single extraction path, Step 1 routes each input to the provider best suited to its characteristics:
 
 - **DOCX and born-digital PDFs** (with local-safe languages) go through local text extraction with page-level layout classification. Each page is categorized — table, narrative, multi-column, graphic/diagram, or ambiguous — and the extraction strategy adjusts accordingly. A legal document with a narrative introduction, a tabular fee schedule, and a multi-column appendix gets appropriate handling for each section rather than a single strategy applied uniformly.
-- **Scanned documents and images** (scanned PDFs, weak-text PDFs, non-local-safe languages, raster image uploads) route to cloud OCR for higher-fidelity extraction.
+- **Scanned documents and images** (scanned PDFs, weak-text PDFs, non-local-safe languages, raster image uploads) route to a switchable cloud OCR lane — currently, Google Document AI or Datalab, selected per deployment as an operational decision rather than a fixed architectural choice.
 - **Public webpage URLs** go through HTML extraction and Markdown conversion.
 
 A planned addition to Step 1 is **sensitive information anonymization** — stripping personally identifiable and confidential content before documents are sent to cloud OCR or downstream LLM-powered steps. This ensures sensitive information never leaves the local machine. Anonymized content is re-inserted after translation in Step 3.
@@ -162,6 +169,19 @@ When review signals matter, they can carry forward into the final output so the 
 
 The longer-term goal is for translation pipeline outputs to feed directly into the [Legal Knowledge Base](../legal-knowledge-base/) — translated and structure-corrected documents becoming ingestion-ready source material for the RAG layer without manual reformatting.
 
+### Partner API
+
+The system exposes a server-to-server REST API for programmatic access to the full translation pipeline:
+
+- **Authentication:** bearer-token API keys with per-partner rate limits and concurrent job caps
+- **Job lifecycle:** create jobs from file uploads or public URLs, poll for status, cancel active jobs, purge completed jobs
+- **Webhook delivery:** terminal events (`job.completed`, `job.failed`, `job.cancelled`) are pushed to partner-supplied URLs with HMAC-SHA256 signatures for verification
+- **Idempotency:** safe retries via `Idempotency-Key` headers — duplicate submissions return the original job instead of creating a new one
+- **Review metadata:** `warnings`, `review_findings`, and `review_targets` from the pipeline are surfaced directly in API responses, so downstream systems can programmatically decide whether output needs human review
+- **Self-describing:** OpenAPI schema at `/openapi.json`, interactive docs at `/docs`, and a public instructions page at `/api-docs`
+
+This is how the pipeline is designed to integrate with other systems — a law firm's document management platform, a knowledge base ingestion service, or a client-facing portal can submit jobs and receive results without interacting with the web UI.
+
 ---
 
 ## What Makes This Different
@@ -202,6 +222,24 @@ The pipeline includes production-hardened protections against this:
 
 These protections were built in response to a real production incident where Bengali documents triggered 70× content expansion and infinite recursion.
 
+### Large Document Handling
+
+Long documents create compounding risks — more chunks mean more chances for a single failure to stall the pipeline. The system includes specific protections for large documents:
+
+- **Per-chunk timeouts:** each chunk has a 20-minute wall-clock limit, cumulative across retries, so a single problematic chunk cannot consume the full step timeout
+- **Automatic stage skipping:** documents with 20 or more chunks skip numbering validation (Step 2c) — a deliberate tradeoff that reduces processing time significantly while preserving the stages with the highest impact
+- **Tiered step timeouts:** Step 2 and Step 3 get 8-hour timeouts; Step 1 and Step 4 get 1-hour timeouts — reflecting the actual time profiles of each stage
+- **Tiered export handling:** final conversion uses graduated memory limits and timeouts based on output file size, with automatic format fallback for very large files
+
+### Quality Testing Infrastructure
+
+Translation quality cannot be verified by unit tests alone. The project includes a structured testing framework for tracking real-document quality across languages, OCR routes, and document characteristics:
+
+- **Quality matrix:** a coverage snapshot tracking pass/warn/fail status per language, per OCR route, and per document challenge factor (clean, scanned, diagram-heavy, multi-column, footnotes, etc.)
+- **Campaign-based testing:** a defined sweep order — calibration on Thai, then baseline across all languages, then stress tests for progressively harder document types
+- **Synthetic benchmark:** generates born-digital PDF fixtures and scores table/footnote/endnote preservation, runnable locally before any Step 1 structural change
+- **Gold-corpus benchmark:** compares real challenge PDFs against manually verified Gold Markdown, with automatic slicing for over-limit documents
+
 ### Review-Aware Design
 
 One of the core ideas behind the project is that not every risky document should silently pass as "done."
@@ -229,13 +267,18 @@ This is an active production system, in daily use for the builder's legal practi
 
 ### Latest Developments
 
-- Review-aware output for high-risk cases — structured findings that identify where human inspection is needed
-- Hybrid provider routing with cloud OCR for scanned documents and raster images
+- **Partner API** — full server-to-server REST API with bearer-token auth, webhook delivery, idempotency keys, and per-partner rate and concurrency limits
+- **Switchable cloud OCR** — hybrid Step 1 routing now supports Google Document AI and Datalab as interchangeable cloud OCR backends, selectable per deployment
+- **Quality testing framework** — structured campaign-based testing matrix tracking pass/warn/fail across languages, OCR routes, and document challenge factors
+- **Large document optimizations** — per-chunk timeouts, automatic stage skipping, and tiered export handling for long documents
+- **Born-digital layout classification** — native-text pages classified as table, narrative, multi-column, graphic/diagram, or ambiguous, with extraction strategy adjusted accordingly
+- **Review-aware output** — structured findings that propagate through every pipeline step and into the final exported document
 
 ### Future Developments
 
 - Sensitive information anonymization before cloud OCR and LLM processing
-- Expanded production testing across all supported language pairs
+- Expanded production testing across all supported language pairs (Thai is deepest; others are implemented but less recently benchmarked)
+- Distributed rate limiting at the infrastructure/proxy layer
 
 ---
 

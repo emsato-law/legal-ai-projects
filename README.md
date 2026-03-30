@@ -26,9 +26,9 @@ This repository documents the architecture, design decisions, and system flows b
 
 | Metric | Detail |
 |---|---|
-| **Combined codebase** | 80,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
-| **Total commits** | 1,500+ across all projects |
-| **Production files** | 250+ tracked files |
+| **Combined codebase** | 140,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
+| **Total commits** | 1,600+ across all projects |
+| **Production files** | 750+ tracked files (excluding knowledge base content) |
 | **First commit** | 2023 |
 | **Stack** | Python · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Full deployment pipelines |
 
@@ -42,7 +42,8 @@ This repository documents the architecture, design decisions, and system flows b
 - **Multi-model routing** — separate models for OCR correction, table reconstruction, and translation, each with task-appropriate temperature tuning
 - **Language-aware prompt architecture** — specialized prompts where linguistically necessary (Thai, Bengali), generic prompts where not
 - **Anti-runaway chunking** — production-hardened protections against LLM content expansion and infinite recursion in long documents
-- **Hybrid extraction routing** — born-digital PDFs go through native extraction with page-level layout classification; scanned documents and raster images route to cloud OCR
+- **Hybrid extraction routing** — born-digital PDFs go through local native extraction with page-level layout classification; scanned documents and raster images route to a switchable cloud OCR lane (currently, Google Document AI or Datalab)
+- **Partner API** — server-to-server REST API with bearer-token auth, webhook delivery with HMAC signatures, idempotency keys, and per-partner rate and concurrency limits
 - **Review-aware output** — structured findings identify where human inspection is needed, rather than silently passing risky output
 - **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF
@@ -82,7 +83,7 @@ Step 1 ─ Convert to Markdown
            │     └── Sensitive information anonymization (coming soon) 🤖
            ├── Scanned documents and images →
            │     ├── Sensitive information anonymization (coming soon) 🤖
-           │     └── Cloud OCR 🤖
+           │     └── Cloud OCR (switchable: Google Document AI / Datalab) 🤖
            └── Public webpage URL → HTML extraction + Markdown conversion
 
 Step 2 ─ Correct and Normalize
@@ -104,6 +105,12 @@ Step 4 ─ Export
            ├── DOCX       │→ with review signals carried forward
            ├── HTML       │
            └── PDF       ─┘
+
+Partner API ─ Server-to-server integration
+           ├── Bearer-token auth with per-partner limits
+           ├── Job lifecycle: create, poll, cancel, purge
+           ├── Webhook delivery with HMAC signatures
+           └── Idempotency keys for safe retries
 ```
 
 → [Architecture & Design](./translation-pipeline/README.md)
@@ -208,4 +215,4 @@ For more information: [emsato.com](https://emsato.com) or [LinkedIn](https://www
 
 ---
 
-*Last updated: 26 March 2026*
+*Last updated: 30 March 2026*
