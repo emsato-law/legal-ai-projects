@@ -127,7 +127,7 @@ Partner API ─ Server-to-server integration
 
 The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
 
-- **System role:** the canonical middle layer in `Translation Pipeline -> LKB -> LW`
+- **System role:** the canonical middle layer in `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
 - **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into LKB ingestion
 - **Current status:** ingestion, validation, UI-assisted review, canonical storage, and search indexing are operational
 - **Downstream role:** the LKB provides the source-backed citations that the Legal Wiki uses for synthesis pages
@@ -167,7 +167,7 @@ The Legal Wiki (LW) turns source-backed Legal Knowledge Base materials into livi
 ### [Automated Research Pipelines](./automated-research-pipelines/)
 **Scheduled AI-driven research, summarization, and distribution** · *In active use*
 
-A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and distributes results to Discord channels and dashboards. Current use cases include daily news briefings and tracking companies, hiring activity, and funding across the AI legal sector.
+A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and distributes results to Discord channels and dashboards. Current use cases include daily news briefings and tracking company developments, funding activity, and market movements across the AI legal sector.
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 

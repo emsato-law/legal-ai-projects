@@ -77,7 +77,7 @@ Scheduled cronjobs that research specific news topics each morning, produce conc
 
 ### 2. AI Legal Sector Dashboard
 
-A daily research pipeline that tracks hiring activity, funding rounds, and market movements across key companies in the AI legal sector — then updates a structured research file and publishes to the dashboard.
+A daily research pipeline that tracks company developments, funding rounds, and market movements across key companies in the AI legal sector — then updates a structured research file and publishes to the dashboard.
 
 **Schedule:** 7:30 AM daily (Asia/Bangkok)
 
@@ -87,8 +87,8 @@ A daily research pipeline that tracks hiring activity, funding rounds, and marke
 3. Agent searches for the latest AI legal sector news, focusing on target companies (Harvey AI, Legora, Luminance, Spellbook, GC AI, Zania, SCOREalytics, August)
 4. Agent updates `memory/research/ai-legal-tech-companies.md`:
    - Company valuations and funding table
-   - Job opportunities section
-   - In-demand roles section
+   - Company developments section
+   - Market signals section
    - Latest updates section
 5. Changes are committed and pushed to GitLab
 6. Summary is posted to the target Discord channel
