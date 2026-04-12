@@ -1,10 +1,12 @@
-# Legal Knowledge Base
+# Legal Knowledge Base (LKB)
 
 **Files-first ingestion system for legal RAG**
 
-A CLI-driven knowledge base system that transforms primary legal regulations, secondary sources, templates, and practice notes into structured, validated, searchable, and version-controlled Markdown — designed as the foundation layer for retrieval-augmented generation. Currently focused on Thai and U.S. legal materials with multi-jurisdiction support.
+A CLI-driven knowledge base system that transforms primary legal regulations, secondary sources, templates, and practice notes into structured, validated, searchable, and version-controlled Markdown. The LKB is the canonical legal layer of the broader system and is currently focused on Thai and U.S. legal materials with multi-jurisdiction support.
 
 **Status:** Ingestion pipeline, validation, and SQLite search index operational. RAG retrieval layer in active development.
+
+The LW is a separate synthesis layer built on top of LKB citations. It may summarize, compare, and organize the LKB, but it is not controlling authority.
 
 ---
 
@@ -34,9 +36,9 @@ Legal knowledge management is stuck between two bad options:
 
 2. **General-purpose RAG systems** (drop everything into a vector database, hope for the best). These treat a Ministry Notification the same as a dated internal memo. They chunk by token count rather than legal structure. They retrieve by semantic similarity without understanding that a 2025 amendment supersedes a 2019 provision.
 
-Legal RAG needs a *legal-native ingestion layer* — one that understands document types, hierarchical structure, temporal relationships, jurisdictional scope, and bilingual instrument pairs before anything gets embedded. This system builds that layer.
+Legal RAG needs a *legal-native ingestion layer* — one that understands document types, hierarchical structure, temporal relationships, jurisdictional scope, and bilingual instrument pairs before anything gets embedded. The LKB builds that layer.
 
-A planned upstream source is the [Translation Pipeline](../translation-pipeline/), which produces structure-corrected, translated legal documents in Markdown — the format this knowledge base expects. The goal is for translated output to flow directly into ingestion without manual reformatting.
+A planned upstream source is the [Translation Pipeline](../translation-pipeline/), which produces structure-corrected, translated legal documents in Markdown — the format the LKB expects. The goal is for translated output to flow directly into ingestion without manual reformatting, after which the LKB can serve as the authoritative citation layer for the LW.
 
 ---
 
@@ -53,7 +55,7 @@ A planned upstream source is the [Translation Pipeline](../translation-pipeline/
                        │  kb process
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│           CLASSIFICATION & REVIEW                   │
+│             LKB CLASSIFICATION & REVIEW             │
 │                                                     │
 │  Auto-generate starter kb.yaml:                     │
 │  Document type · Jurisdiction · Authority ·         │
@@ -65,7 +67,7 @@ A planned upstream source is the [Translation Pipeline](../translation-pipeline/
                        │  kb process (confirmed: true)
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│           CANONICAL KB (kb/)                        │
+│             LKB CANONICAL STORE (kb/)               │
 │                                                     │
 │  kb/primary_law/     ← versioned legal instruments  │
 │  kb/notes/           ← commentary & analysis        │
@@ -80,6 +82,15 @@ A planned upstream source is the [Translation Pipeline](../translation-pipeline/
 │                                                     │
 │  SQLite search index · Manifest · Reports           │
 │  (always regenerable from kb/)                      │
+└──────────────────────┬──────────────────────────────┘
+                       │  authoritative citations
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│             LEGAL WIKI (LW)                         │
+│                                                     │
+│  Topics · Issues · Concepts · Timelines             │
+│  Entities · Questions                               │
+│  (source-backed synthesis, not authority)           │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -88,7 +99,7 @@ A planned upstream source is the [Translation Pipeline](../translation-pipeline/
 ## Repository Structure
 
 ```
-legal-templates/
+LKB/
 ├── .agents/                ← AI workflow instructions for building and maintaining the KB
 ├── .gitlab-ci.yml          ← CI pipeline: tests, validation, build smoke checks
 ├── pyproject.toml          ← Python packaging + `kb` console-script entrypoint
@@ -128,6 +139,7 @@ The mental model:
 - **`sources/incoming/`** is the active queue — one item at a time
 - **`sources/archive/`** is the done queue — processed items with their reviewed `kb.yaml`
 - **`build/`** is disposable — regenerate anytime with `kb build-index`
+- **The LKB is authoritative** — the LW consumes its citations but does not replace it
 - **Legacy folders** are backlog reservoirs — move one item at a time into `sources/incoming/` for processing; archive each legacy folder once exhausted
 
 ---
@@ -139,6 +151,15 @@ The mental model:
 The system is built around a strict rule: **`kb/` is the source of truth.** Everything in `build/` is derived and regenerable. The canonical legal text lives in version-controlled Markdown with structured YAML front matter — not in a database, not in a vector store, not in PDFs.
 
 This means every change to the knowledge base is a git commit. Every version of every legal instrument has a traceable history. Diffs between versions are readable. And the entire corpus can be rebuilt from the Markdown files alone.
+
+### LKB and LW Boundary
+
+The LKB and the LW serve different roles:
+
+- The **LKB** stores controlling legal text, provenance, version history, and authoritative citations.
+- The **LW** summarizes, compares, and organizes the LKB into living synthesis pages.
+- If the LW conflicts with the LKB, the LKB wins until the synthesis is corrected.
+- The LW may quote short excerpts when necessary, but it should not duplicate full legal text.
 
 ### One-at-a-Time Ingestion
 
@@ -184,6 +205,20 @@ kb search "SPV" --language en
 kb show "<document-id>" --language en
 ```
 
+### Command Surface
+
+The core LKB workflow now spans both intake and retrieval:
+
+- **`kb help`** — render the authoritative metadata guide and field rules
+- **`kb ui`** — run the local AI-assisted ingest review UI
+- **`kb build-manifest`** — inventory source material and produce review reports
+- **`kb init-family`** — write starter `kb.yaml` files for incoming primary-law families
+- **`kb process`** — process the single active inbox item through review, ingest, archive, and index refresh
+- **`kb validate`** — run semantic validation across canonical files
+- **`kb build-index`** — build or rebuild the SQLite search index
+- **`kb search`** — search indexed content by keyword and metadata filters
+- **`kb show`** — inspect a specific indexed document or fragment
+
 ### Provenance & Audit
 
 Every ingested item carries provenance metadata:
@@ -225,6 +260,7 @@ Because the current phase is structured retrieval — finding specific provision
 | Bilingual instrument handling | ✅ Operational |
 | Audit trail generation | ✅ Operational |
 | Editor support (VS Code schema + snippets) | ✅ Operational |
+| Source-backed downstream wiki drafting | ✅ Operational |
 | Automated ingestion from [Translation Pipeline](../translation-pipeline/) | 🔧 Planned |
 | Embedding generation | 🔧 Planned |
 | RAG retrieval layer | 🔧 Planned |
@@ -235,7 +271,7 @@ Because the current phase is structured retrieval — finding specific provision
 ## Tech Stack
 
 - Python 3.10+ (CLI application installed via `pip install -e .`)
-- Custom CLI (`kb process`, `kb validate`, `kb build-index`, `kb search`)
+- Custom CLI (`kb help`, `kb ui`, `kb build-manifest`, `kb init-family`, `kb process`, `kb validate`, `kb build-index`, `kb search`, `kb show`)
 - SQLite for full-text search indexing
 - YAML front matter for structured metadata
 - JSON Schema for editor autocomplete and validation

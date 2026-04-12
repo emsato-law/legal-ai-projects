@@ -12,6 +12,7 @@ This repository documents the architecture, design decisions, and system flows b
 - [Projects](#projects)
   - [Translation Pipeline](#translation-pipeline)
   - [Legal Knowledge Base](#legal-knowledge-base)
+  - [Legal Wiki](#legal-wiki)
   - [OpenClaw Harness](#openclaw-harness)
   - [Automated Research Pipelines](#automated-research-pipelines)
   - [Fee Proposal Generator](#fee-proposal-generator)
@@ -47,7 +48,7 @@ This repository documents the architecture, design decisions, and system flows b
 - **Review-aware output** — structured findings identify where human inspection is needed, rather than silently passing risky output
 - **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF
-- **Downstream integration:** outputs designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material for RAG
+- **Downstream integration:** outputs designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material, with the Legal Wiki consuming source-backed citations downstream
 
 <div align="center">
   <img src="./translation-pipeline/screenshots/splash.png" alt="Translation Pipeline — Home" width="600">
@@ -118,12 +119,13 @@ Partner API ─ Server-to-server integration
 ---
 
 ### [Legal Knowledge Base](./legal-knowledge-base/)
-**Files-first ingestion system for legal RAG** · *In active development*
+**Files-first canonical legal knowledge layer** · *In active development*
 
-Ingestion and chunking pipeline for primary legal regulations, secondary legal resources, templates, and practice notes — designed as the foundation for a retrieval-augmented generation system.
+The LKB is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
 
-- **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into ingestion
-- **Current status:** operational for document processing and structured storage; RAG retrieval layer is in active development
+- **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into LKB ingestion
+- **Current status:** ingestion, validation, UI-assisted review, canonical storage, and search indexing are operational
+- **Downstream role:** the LKB provides the source-backed citations that the Legal Wiki uses for synthesis pages
 
 <div align="center">
   <img src="./legal-knowledge-base/screenshots/splash.png" alt="Legal Knowledge Base — AI-Assisted KB Ingest" width="600">
@@ -142,6 +144,17 @@ Ingestion and chunking pipeline for primary legal regulations, secondary legal r
 <p>&nbsp;</p>
 
 → [Architecture & Design](./legal-knowledge-base/README.md)
+
+---
+
+### Legal Wiki
+**Synthesis-only legal wiki layer** · *In active development*
+
+The LW turns source-backed LKB materials into living synthesis pages: topics, issues, concepts, timelines, entities, and questions.
+
+- **Authority boundary:** the LW is not canonical legal authority; it summarizes and compares the LKB
+- **Source grounding:** pages carry LKB references and use citation-backed excerpts rather than duplicating full legal text
+- **Authoring flow:** page helpers support both blank page creation and source-grounded draft generation, with human review still required
 
 ---
 
