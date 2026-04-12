@@ -125,7 +125,7 @@ Partner API ─ Server-to-server integration
 ### [Legal Knowledge Base](./legal-knowledge-base/)
 **Files-first canonical legal knowledge layer** · *In active development*
 
-The LKB is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
+The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
 
 - **System role:** the canonical middle layer in `Translation Pipeline -> LKB -> LW`
 - **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into LKB ingestion
@@ -155,7 +155,7 @@ The LKB is the authoritative legal source layer for the system: ingestion, versi
 ### Legal Wiki
 **Synthesis-only legal wiki layer** · *In active development*
 
-The LW turns source-backed LKB materials into living synthesis pages: topics, issues, concepts, timelines, entities, and questions.
+The Legal Wiki (LW) turns source-backed Legal Knowledge Base materials into living synthesis pages: topics, issues, concepts, timelines, entities, and questions.
 
 - **System role:** the synthesis layer in `Translation Pipeline -> LKB -> LW`
 - **Authority boundary:** the LW is not canonical legal authority; it summarizes and compares the LKB
@@ -168,14 +168,6 @@ The LW turns source-backed LKB materials into living synthesis pages: topics, is
 **Scheduled AI-driven research, summarization, and distribution** · *In active use*
 
 A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and distributes results to Discord channels and dashboards. Current use cases include daily news briefings and tracking companies, hiring activity, and funding across the AI legal sector.
-
-<div align="center">
-  <img src="./automated-research-pipelines/screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="600">
-  <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
-  <br><sub>As of 18 March 2026</sub>
-</div>
-
-<p>&nbsp;</p>
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 

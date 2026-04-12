@@ -5,8 +5,8 @@
 A set of autonomous research pipelines that run on cron schedules through a custom agent runtime. Each pipeline spawns an isolated agent session, performs targeted web research, produces structured summaries using LLM analysis, and distributes results to designated channels — with no manual intervention.
 
 <div align="center">
-  <img src="./screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="700">
-  <br><em>LobsterBoard — Cron schedules, activity log, system monitoring, and live sessions</em>
+  <img src="./screenshots/lobsterboard.png" alt="Research Pipelines Dashboard" width="700">
+  <br><em>Dashboard — Cron schedules, activity log, system monitoring, and live sessions</em>
   <br><sub>As of 18 March 2026</sub>
 </div>
 
@@ -28,7 +28,7 @@ These pipelines replace that daily manual scan with scheduled, AI-driven researc
 ┌─────────────────────────────────────────────────────┐
 │               CRON TRIGGER                          │
 │                                                     │
-│  LobsterBoard Scheduler → Spawn Isolated Session    │
+│  Scheduler → Spawn Isolated Session                 │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
@@ -52,7 +52,7 @@ These pipelines replace that daily manual scan with scheduled, AI-driven researc
 │              DISTRIBUTION                           │
 │                                                     │
 │  Discord Channels · Git Commit & Push ·             │
-│  LobsterBoard Sync · Main Session Report            │
+│  Dashboard Sync · Main Session Report               │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -77,7 +77,7 @@ Scheduled cronjobs that research specific news topics each morning, produce conc
 
 ### 2. AI Legal Sector Dashboard
 
-A daily research pipeline that tracks hiring activity, funding rounds, and market movements across key companies in the AI legal sector — then updates a structured research file and publishes to the LobsterBoard dashboard.
+A daily research pipeline that tracks hiring activity, funding rounds, and market movements across key companies in the AI legal sector — then updates a structured research file and publishes to the dashboard.
 
 **Schedule:** 7:30 AM daily (Asia/Bangkok)
 
@@ -94,7 +94,7 @@ A daily research pipeline that tracks hiring activity, funding rounds, and marke
 6. Summary is posted to the target Discord channel
 7. Summary is reported back to the main session
 
-**Output:** Updated research file → synced to LobsterBoard at 6 AM → Discord notification.
+**Output:** Updated research file → synced to the dashboard at 6 AM → Discord notification.
 
 ---
 
@@ -117,7 +117,7 @@ Discord provides immediate, low-friction delivery to the right audience with ric
 - **Brave Search** — Web search for research phase
 - **GitLab** — Version-controlled research file storage
 - **Discord webhooks** — Channel-based result distribution
-- **LobsterBoard** — Cron scheduling and dashboard sync
+- **Dashboard layer** — Cron scheduling and dashboard sync
 
 ---
 
@@ -128,7 +128,7 @@ Discord provides immediate, low-friction delivery to the right audience with ric
 - Brave Search API (web research)
 - Discord webhook integration
 - Git-based research file management
-- Cron scheduling via LobsterBoard
+- Cron scheduling via the dashboard layer
 
 ---
 
