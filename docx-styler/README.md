@@ -1,4 +1,4 @@
-# Docx Styler (Outline Styler)
+# DOCX Styler
 
 **AI-driven paragraph styling for Word documents**
 
@@ -8,14 +8,9 @@ A two-phase tool that automatically assigns Word paragraph styles (Heading 1, He
 
 ## Problem
 
-Every lawyer knows this document:
+Legal Word documents often accumulate inconsistent paragraph styling over multiple drafting rounds, template changes, and copy-and-paste reuse. A heading that should map to a single style may appear in different fonts or sizes across the same document; body text may inherit conflicting local overrides; numbering may restart unexpectedly; and the meaning of a default style such as `Normal` may vary from one source section to another.
 
-- Heading 1 is 14pt Arial Bold on page 1, then 13pt Times New Roman Bold on page 4
-- Body text alternates between three different paragraph styles depending on who drafted which section
-- Numbering restarts unexpectedly because someone copy-pasted from a different template
-- "Normal" style means something different in every section
-
-This happens because legal documents accumulate formatting like sediment — each drafter's Word defaults, each firm's template, each round of tracked changes leaves a layer. Manual cleanup takes hours and is error-prone. Most lawyers give up and ship inconsistent documents.
+These inconsistencies are not merely cosmetic. They weaken document structure, reduce the reliability of Word navigation and table-of-contents generation, and make later revisions harder to manage. Manual cleanup is slow, repetitive, and prone to error, especially in long agreements assembled from prior drafts. A useful solution therefore needs to improve styling consistency without removing human control over structurally important formatting decisions.
 
 ---
 

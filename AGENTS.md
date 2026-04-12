@@ -17,6 +17,7 @@ Use these names consistently when maintaining this public repo:
 
 - `legal-templates` = `Legal Knowledge Base` / `LKB`
 - `legal-synthesis` = `Legal Wiki` / `LW`
+- `docx-styler` = `DOCX Styler`
 
 In public-facing prose, prefer the public names `Legal Knowledge Base`, `LKB`, `Legal Wiki`, and `LW`. Do not introduce private-repo names in README copy unless there is a specific maintainer reason to do so.
 
@@ -29,7 +30,7 @@ The public portfolio currently includes:
 - Legal Wiki
 - Automated Research Pipelines
 - Fee Proposal Generator
-- Docx Styler
+- DOCX Styler
 - SHA-SG
 
 ## Projects Out Of Scope
@@ -84,7 +85,7 @@ Use these defaults unless a maintainer asks for a deliberate change:
 - **Legal Wiki:** synthesis-only layer built on top of LKB citations
 - **Automated Research Pipelines:** scheduled AI-driven research, summarization, and distribution
 - **Fee Proposal Generator:** retired internal drafting tool
-- **Docx Styler:** retired document-formatting tool
+- **DOCX Styler:** retired document-formatting tool
 - **SHA-SG:** version-controlled Singapore venture capital template set
 
 ## Maintenance Rule

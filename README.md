@@ -15,7 +15,7 @@ This public repository explains the architecture, design decisions, and system f
   - [Legal Wiki](#legal-wiki)
   - [Automated Research Pipelines](#automated-research-pipelines)
   - [Fee Proposal Generator](#fee-proposal-generator)
-  - [Docx Styler](#docx-styler)
+  - [DOCX Styler](#docx-styler)
   - [SHA-SG](#sha-sg)
 - [Design Philosophy](#design-philosophy)
 - [About](#about)
@@ -182,7 +182,7 @@ Generates structured fee proposals from intake parameters — scope, personnel, 
 
 ---
 
-### [Docx Styler](./docx-styler/)
+### [DOCX Styler](./docx-styler/)
 **AI-driven paragraph styling for Word documents** · *Retired — replaced by firm-wide legal AI platform*
 
 Applies consistent paragraph-level styling to legal Word documents using AI classification. Addresses the endemic problem of inconsistent formatting in documents that pass through multiple hands — associates, partners, clients, opposing counsel — before final production.
