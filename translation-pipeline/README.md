@@ -160,14 +160,14 @@ The goal is not just fluent output, but legally usable output with better consis
 
 Final output can be generated as:
 
-- Markdown (also the format expected by the LKB for downstream ingestion)
+- Markdown (also the format expected by the Legal Knowledge Base for downstream ingestion)
 - DOCX
 - HTML
 - PDF
 
 When review signals matter, they can carry forward into the final output so the document itself makes clear that manual review is still required.
 
-The longer-term goal is for translation pipeline outputs to feed directly into the [Legal Knowledge Base](../legal-knowledge-base/) — translated and structure-corrected documents becoming ingestion-ready source material for the canonical legal layer without manual reformatting. From there, the LW can build source-grounded synthesis on top of LKB citations.
+The longer-term goal is for translation pipeline outputs to feed directly into the [Legal Knowledge Base](../legal-knowledge-base/) — translated and structure-corrected documents becoming ingestion-ready source material for the canonical legal layer without manual reformatting. From there, the Legal Wiki can build source-grounded synthesis on top of Legal Knowledge Base citations.
 
 ### Partner API
 

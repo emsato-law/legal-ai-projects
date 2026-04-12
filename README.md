@@ -1,8 +1,8 @@
 # Legal AI Projects
 
-Legal AI tools built for real-world practice across ASEAN jurisdictions.
+Public-facing architecture and design notes for legal AI systems built for real-world practice across ASEAN jurisdictions.
 
-This repository documents the architecture, design decisions, and system flows behind a portfolio of legal AI tools. Source code is maintained in private repositories; what follows is the engineering reasoning behind each system.
+This public repository explains the architecture, design decisions, and system flows behind a portfolio of legal AI projects whose implementation lives in private repositories. It is not a source-code mirror. Its purpose is to document what each system is for, how it is structured, and why it was designed that way.
 
 ---
 
@@ -13,7 +13,6 @@ This repository documents the architecture, design decisions, and system flows b
   - [Translation Pipeline](#translation-pipeline)
   - [Legal Knowledge Base](#legal-knowledge-base)
   - [Legal Wiki](#legal-wiki)
-  - [OpenClaw Harness](#openclaw-harness)
   - [Automated Research Pipelines](#automated-research-pipelines)
   - [Fee Proposal Generator](#fee-proposal-generator)
   - [Docx Styler](#docx-styler)
@@ -33,6 +32,10 @@ This repository documents the architecture, design decisions, and system flows b
 | **First commit** | 2023 |
 | **Stack** | Python · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Full deployment pipelines |
 
+The portfolio’s core knowledge flow is:
+
+`Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
+
 ---
 
 ## Projects
@@ -48,6 +51,7 @@ This repository documents the architecture, design decisions, and system flows b
 - **Review-aware output** — structured findings identify where human inspection is needed, rather than silently passing risky output
 - **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF
+- **System role:** the first stage in the `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki` chain
 - **Downstream integration:** outputs designed to feed directly into the [Legal Knowledge Base](./legal-knowledge-base/) as ingestion-ready source material, with the Legal Wiki consuming source-backed citations downstream
 
 <div align="center">
@@ -123,6 +127,7 @@ Partner API ─ Server-to-server integration
 
 The LKB is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
 
+- **System role:** the canonical middle layer in `Translation Pipeline -> LKB -> LW`
 - **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into LKB ingestion
 - **Current status:** ingestion, validation, UI-assisted review, canonical storage, and search indexing are operational
 - **Downstream role:** the LKB provides the source-backed citations that the Legal Wiki uses for synthesis pages
@@ -152,33 +157,17 @@ The LKB is the authoritative legal source layer for the system: ingestion, versi
 
 The LW turns source-backed LKB materials into living synthesis pages: topics, issues, concepts, timelines, entities, and questions.
 
+- **System role:** the synthesis layer in `Translation Pipeline -> LKB -> LW`
 - **Authority boundary:** the LW is not canonical legal authority; it summarizes and compares the LKB
 - **Source grounding:** pages carry LKB references and use citation-backed excerpts rather than duplicating full legal text
 - **Authoring flow:** page helpers support both blank page creation and source-grounded draft generation, with human review still required
 
 ---
 
-### [OpenClaw Harness](./openclaw-harness/)
-**LLM-to-OS bridge for local task execution** · *In active use*
-
-OpenClaw connects LLM reasoning to a local execution runtime, enabling automated task execution through filesystem operations, shell commands, application control, and network requests. This deployment integrates multiple models (MiniMax 2.5 Pro for routine operations, Claude Sonnet for complex reasoning) with explicit routing logic. LobsterBoard provides the operational dashboard for managing mini-apps, scheduled jobs, monitoring execution, and system analytics.
-
-<div align="center">
-  <img src="./openclaw-harness/screenshots/ocr-dashboard.png" alt="OCR Dashboard" width="600">
-  <br><em>OCR Dashboard — Multi-engine document processing with ASEAN language support</em>
-  <br><sub>As of 18 March 2026</sub>
-</div>
-
-<p>&nbsp;</p>
-
-→ [Architecture & Design](./openclaw-harness/README.md)
-
----
-
 ### [Automated Research Pipelines](./automated-research-pipelines/)
 **Scheduled AI-driven research, summarization, and distribution** · *In active use*
 
-A set of autonomous pipelines running on cron schedules via OpenClaw. Each pipeline spawns an isolated agent session, performs targeted web research, produces LLM-generated summaries, and distributes results to Discord channels and dashboards. Currently runs daily news briefings and an AI legal tech jobs/funding tracker.
+A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and distributes results to Discord channels and dashboards. Current use cases include daily news briefings and tracking companies, hiring activity, and funding across the AI legal sector.
 
 <div align="center">
   <img src="./automated-research-pipelines/screenshots/lobsterboard.png" alt="LobsterBoard Dashboard" width="600">
@@ -227,6 +216,8 @@ These systems share a common set of architectural principles:
 
 - **Model routing by task complexity.** Lightweight models handle routine extraction and classification. Capable models handle reasoning, drafting, and ambiguous interpretation. Cost and speed stay proportional to difficulty.
 
+- **Canonical first, synthesis second.** The LKB holds controlling legal text and citations. The LW organizes, compares, and explains that material without replacing it.
+
 - **Legal-native data models.** Clause hierarchies, numbered sections, mixed numeral systems, and bilingual instrument pairs are modeled as first-class structures, not flattened into plain text.
 
 - **Review-aware over silently confident.** Output that looks correct but has hidden defects is a serious risk for legal work. These systems surface uncertainty rather than hide it — structured review findings and explicit warnings are first-class features.
@@ -244,4 +235,4 @@ For more information: [emsato.com](https://emsato.com) or [LinkedIn](https://www
 
 ---
 
-*Last updated: 30 March 2026*
+*Last updated: 12 April 2026*

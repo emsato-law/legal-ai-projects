@@ -6,7 +6,7 @@ A CLI-driven knowledge base system that transforms primary legal regulations, se
 
 **Status:** Ingestion pipeline, validation, and SQLite search index operational. RAG retrieval layer in active development.
 
-The LW is a separate synthesis layer built on top of LKB citations. It may summarize, compare, and organize the LKB, but it is not controlling authority.
+The Legal Wiki (LW) is a separate synthesis layer built on top of LKB citations. It may summarize, compare, and organize the LKB, but it is not controlling authority.
 
 ---
 
