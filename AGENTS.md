@@ -20,6 +20,7 @@ Use these names consistently when maintaining this public repo:
 - `docx-styler` = `DOCX Styler`
 
 In public-facing prose, prefer the public names `Legal Knowledge Base`, `LKB`, `Legal Wiki`, and `LW`. Do not introduce private-repo names in README copy unless there is a specific maintainer reason to do so.
+Do not use `LKB`, `LW`, or similar project abbreviations on any page until that page has first introduced the full public name in the form `Legal Knowledge Base (LKB)` or `Legal Wiki (LW)`.
 
 ## Projects In Scope
 
@@ -32,12 +33,6 @@ The public portfolio currently includes:
 - Fee Proposal Generator
 - DOCX Styler
 - SHA-SG
-
-## Projects Out Of Scope
-
-- OpenClaw Harness
-
-Do not add OpenClaw Harness to project indexes, portfolio summaries, top-level README project lists, or routine rewrite passes unless explicitly asked to restore it for historical reasons.
 
 ## Editorial Boundary
 
@@ -53,7 +48,7 @@ Do not add OpenClaw Harness to project indexes, portfolio summaries, top-level R
 - Keep claims accurate, restrained, and supportable.
 - Prefer architecture, workflow, and design-rationale framing over marketing language.
 - Assume an informed technical reader who wants signal, not slogans.
-- Use acronyms only after introducing the full public name once.
+- On each page, use acronyms only after introducing the full public name on that same page.
 
 ## Formatting Rules
 
@@ -62,7 +57,7 @@ Do not add OpenClaw Harness to project indexes, portfolio summaries, top-level R
 - Use short bullet lists for key capabilities or design decisions.
 - Keep screenshots and captions factual, with dates in the format `As of 18 March 2026`.
 - Use consistent public naming throughout a document once a name is established.
-- When describing relationships, use: `Translation Pipeline -> LKB -> LW`.
+- When abbreviations have not yet been defined on that page, describe relationships as: `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`.
 - Keep file-level prose concise; avoid turning README files into exhaustive specifications.
 
 ## Rewrite Rules
@@ -74,7 +69,6 @@ When rewriting or expanding docs in this repo:
 - Treat the LW as synthesis-only.
 - State clearly that the LW depends on LKB-backed citations and does not replace controlling authority.
 - Prefer public category names over private implementation names.
-- Remove or avoid stale references to projects that are no longer in scope for the public portfolio.
 
 ## Default Project Framing
 

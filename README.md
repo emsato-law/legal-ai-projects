@@ -128,9 +128,9 @@ Partner API ─ Server-to-server integration
 The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
 
 - **System role:** the canonical middle layer in `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
-- **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into LKB ingestion
+- **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into Legal Knowledge Base ingestion
 - **Current status:** ingestion, validation, UI-assisted review, canonical storage, and search indexing are operational
-- **Downstream role:** the LKB provides the source-backed citations that the Legal Wiki uses for synthesis pages
+- **Downstream role:** the Legal Knowledge Base provides the source-backed citations that the Legal Wiki uses for synthesis pages
 
 <div align="center">
   <img src="./legal-knowledge-base/screenshots/splash.png" alt="Legal Knowledge Base — AI-Assisted KB Ingest" width="600">
@@ -152,15 +152,17 @@ The Legal Knowledge Base (LKB) is the authoritative legal source layer for the s
 
 ---
 
-### Legal Wiki
+### [Legal Wiki](./legal-wiki/)
 **Synthesis-only legal wiki layer** · *In active development*
 
-The Legal Wiki (LW) turns source-backed Legal Knowledge Base materials into living synthesis pages: topics, issues, concepts, timelines, entities, and questions.
+The Legal Wiki is the living synthesis layer for the legal knowledge system. It turns source-backed Legal Knowledge Base materials into topics, issues, concepts, timelines, entities, and question pages without replacing the underlying authority.
 
-- **System role:** the synthesis layer in `Translation Pipeline -> LKB -> LW`
-- **Authority boundary:** the LW is not canonical legal authority; it summarizes and compares the LKB
-- **Source grounding:** pages carry LKB references and use citation-backed excerpts rather than duplicating full legal text
+- **System role:** the synthesis layer in `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
+- **Authority boundary:** the Legal Wiki is not the canonical legal source of truth; controlling legal text, provenance, version history, and authoritative citations live in the Legal Knowledge Base
+- **Source grounding:** pages remain explicitly grounded in Legal Knowledge Base citations and should not duplicate full legal text except for short excerpts when necessary
 - **Authoring flow:** page helpers support both blank page creation and source-grounded draft generation, with human review still required
+
+→ [Architecture & Design](./legal-wiki/README.md)
 
 ---
 
@@ -208,7 +210,7 @@ These systems share a common set of architectural principles:
 
 - **Model routing by task complexity.** Lightweight models handle routine extraction and classification. Capable models handle reasoning, drafting, and ambiguous interpretation. Cost and speed stay proportional to difficulty.
 
-- **Canonical first, synthesis second.** The LKB holds controlling legal text and citations. The LW organizes, compares, and explains that material without replacing it.
+- **Canonical first, synthesis second.** The Legal Knowledge Base holds controlling legal text and citations. The Legal Wiki organizes, compares, and explains that material without replacing it.
 
 - **Legal-native data models.** Clause hierarchies, numbered sections, mixed numeral systems, and bilingual instrument pairs are modeled as first-class structures, not flattened into plain text.
 
@@ -227,4 +229,4 @@ For more information: [emsato.com](https://emsato.com) or [LinkedIn](https://www
 
 ---
 
-*Last updated: 12 April 2026*
+*Last updated: 13 April 2026*
