@@ -50,6 +50,7 @@ The portfolio’s core knowledge flow is:
 - **Cloud job architecture** — web control plane backed by queued long-running workers, durable job state, and retained per-step artifacts
 - **Partner and partial-workflow APIs** — server-to-server REST access with bearer-token auth, webhook delivery, idempotency keys, cancellation, purge, and step-specific artifact downloads
 - **Review-aware output** — warnings, review targets, and structured findings identify where human inspection is needed, rather than silently passing risky output
+- **Step 1 to Step 2 diff viewer** — Advanced Mode compares raw conversion output against corrected/normalized Markdown before translation
 - **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF
 - **System role:** the first stage in the `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki` chain
@@ -97,7 +98,8 @@ Step 2 ─ Correct and Normalize
            ├── Table reconstruction 🤖
            ├── Numbering validation, mixed numeral systems 🤖
            ├── Structural analysis → review findings 🤖
-           └── Text cleanup 🤖
+           ├── Text cleanup 🤖
+           └── Step 1 ↔ Step 2 cleanup diff viewer
 
 Step 3 ─ Translate
            ├── Language-pair-specific prompt templates 🤖
@@ -178,7 +180,7 @@ A set of autonomous pipelines running on scheduled agent sessions. Each run perf
 - **Research modules:** Thai law, AI updates, general news, and AI legal-sector company tracking
 - **Dashboard output:** historical item stores, source-backed summaries, tag filtering, date-range views, and company profile pages
 - **Feedback loop:** local article feedback is read by the next scheduled run and folded into later tagging, relevance, and prioritization decisions
-- **Legacy migration:** older Discord and LobsterBoard-era processes are now process references, not runtime dependencies
+- **Legacy migration:** older Discord-first dashboard processes are now process references, not runtime dependencies
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 
