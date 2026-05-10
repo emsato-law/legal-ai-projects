@@ -27,10 +27,10 @@ This public repository explains the architecture, design decisions, and system f
 | Metric | Detail |
 |---|---|
 | **Combined codebase** | 140,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
-| **Total commits** | 1,600+ across all projects |
-| **Production files** | 750+ tracked files (excluding knowledge base content) |
+| **Total commits** | 1,900+ across verified active project repositories |
+| **Tracked project files** | 900+ files across verified active project repositories |
 | **First commit** | 2023 |
-| **Stack** | Python · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Full deployment pipelines |
+| **Stack** | Python · JavaScript · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Scheduled automations · Full deployment pipelines |
 
 The portfolio’s core knowledge flow is:
 
@@ -47,8 +47,9 @@ The portfolio’s core knowledge flow is:
 - **Language-aware prompt architecture** — specialized prompts where linguistically necessary (Thai, Bengali), generic prompts where not
 - **Anti-runaway chunking** — production-hardened protections against LLM content expansion and infinite recursion in long documents
 - **Hybrid extraction routing** — born-digital PDFs go through local native extraction with page-level layout classification; scanned documents and raster images route to a switchable cloud OCR lane (currently, Google Document AI or Datalab)
-- **Partner API** — server-to-server REST API with bearer-token auth, webhook delivery with HMAC signatures, idempotency keys, and per-partner rate and concurrency limits
-- **Review-aware output** — structured findings identify where human inspection is needed, rather than silently passing risky output
+- **Cloud job architecture** — web control plane backed by queued long-running workers, durable job state, and retained per-step artifacts
+- **Partner and partial-workflow APIs** — server-to-server REST access with bearer-token auth, webhook delivery, idempotency keys, cancellation, purge, and step-specific artifact downloads
+- **Review-aware output** — warnings, review targets, and structured findings identify where human inspection is needed, rather than silently passing risky output
 - **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF
 - **System role:** the first stage in the `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki` chain
@@ -125,11 +126,12 @@ Partner API ─ Server-to-server integration
 ### [Legal Knowledge Base](./legal-knowledge-base/)
 **Files-first canonical legal knowledge layer** · *In active development*
 
-The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, and SQLite-backed search.
+The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, SQLite-backed search, and reviewed downstream Legal Wiki handoff.
 
 - **System role:** the canonical middle layer in `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
-- **Planned upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is designed to flow directly into Legal Knowledge Base ingestion
-- **Current status:** ingestion, validation, UI-assisted review, canonical storage, and search indexing are operational
+- **Designed upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is intended to flow into Legal Knowledge Base ingestion
+- **Current status:** ingestion, validation, UI-assisted review, canonical storage, search indexing, and source-backed downstream drafting are operational
+- **Post-ingest workflow:** primary law, notes, references, and templates can move from canonical ingest into a staged Legal Wiki review without making the wiki authoritative
 - **Downstream role:** the Legal Knowledge Base provides the source-backed citations that the Legal Wiki uses for synthesis pages
 
 <div align="center">
@@ -155,12 +157,14 @@ The Legal Knowledge Base (LKB) is the authoritative legal source layer for the s
 ### [Legal Wiki](./legal-wiki/)
 **Synthesis-only legal wiki layer** · *In active development*
 
-The Legal Wiki is the living synthesis layer for the legal knowledge system. It turns source-backed Legal Knowledge Base materials into topics, issues, concepts, timelines, entities, and question pages without replacing the underlying authority.
+The Legal Wiki is the living synthesis layer for the legal knowledge system. It turns source-backed Legal Knowledge Base materials into topics, issues, concepts, process pages, entities, and question pages without replacing the underlying authority.
 
 - **System role:** the synthesis layer in `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
 - **Authority boundary:** the Legal Wiki is not the canonical legal source of truth; controlling legal text, provenance, version history, and authoritative citations live in the Legal Knowledge Base
 - **Source grounding:** pages remain explicitly grounded in Legal Knowledge Base citations and should not duplicate full legal text except for short excerpts when necessary
-- **Authoring flow:** page helpers support both blank page creation and source-grounded draft generation, with human review still required
+- **Page model:** exactly six page types — topics, issues, concepts, process pages, entities, and questions
+- **Authoring flow:** page helpers support blank page creation, source-grounded draft generation, and reviewed post-ingest proposals from the Legal Knowledge Base
+- **Browsing model:** plain Markdown designed to work as an Obsidian vault with stable page IDs, backlinks, and graph navigation
 
 → [Architecture & Design](./legal-wiki/README.md)
 
@@ -169,7 +173,12 @@ The Legal Wiki is the living synthesis layer for the legal knowledge system. It 
 ### [Automated Research Pipelines](./automated-research-pipelines/)
 **Scheduled AI-driven research, summarization, and distribution** · *In active use*
 
-A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and distributes results to Discord channels and dashboards. Current use cases include daily news briefings and tracking company developments, funding activity, and market movements across the AI legal sector.
+A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and updates dashboard-backed research stores. Current use cases include daily legal and AI briefings, general news monitoring, and tracking company developments, funding activity, and market movements across the AI legal sector.
+
+- **Research modules:** Thai law, AI updates, general news, and AI legal-sector company tracking
+- **Dashboard output:** historical item stores, source-backed summaries, tag filtering, date-range views, and company profile pages
+- **Feedback loop:** local article feedback is read by the next scheduled run and folded into later tagging, relevance, and prioritization decisions
+- **Legacy migration:** older Discord and LobsterBoard-era processes are now process references, not runtime dependencies
 
 → [Architecture & Design](./automated-research-pipelines/README.md)
 
@@ -222,11 +231,11 @@ These systems share a common set of architectural principles:
 
 - **Background:** U.S.-qualified technology lawyer at DFDL Legal & Tax
 - **AI leadership roles:** AI Strategic Initiative committee member, regional lead for Knowledge Managers, and Legal AI Workflows Champion
-- **Builder:** designer and developer of the AI systems documented here — 80,000+ lines of production code across legal translation, knowledge management, document automation, and workflow orchestration
+- **Builder:** designer and developer of the AI systems documented here — 140,000+ lines of production code and documentation across legal translation, knowledge management, document automation, and workflow orchestration
 - **Region:** based in ASEAN, working across Thai, Singaporean, and regional legal frameworks
 
 For more information: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.com/in/emsato/)
 
 ---
 
-*Last updated: 13 April 2026*
+*Last updated: 10 May 2026*
