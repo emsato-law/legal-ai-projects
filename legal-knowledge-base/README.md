@@ -4,7 +4,7 @@
 
 A CLI-driven knowledge base system that transforms primary legal regulations, secondary sources, templates, and practice notes into structured, validated, searchable, and version-controlled Markdown. The LKB is the canonical legal layer of the broader system and is currently focused on Thai and U.S. legal materials with multi-jurisdiction support.
 
-**Status:** Ingestion pipeline, validation, and SQLite search index operational. RAG retrieval layer in active development.
+**Status:** Ingestion pipeline, validation, SQLite search index, UI-assisted review, and source-backed Legal Wiki handoff operational. RAG retrieval layer in active development.
 
 The Legal Wiki (LW) is a separate synthesis layer built on top of LKB citations. It may summarize, compare, and organize the LKB, but it is not controlling authority.
 
@@ -38,7 +38,7 @@ Legal knowledge management is stuck between two bad options:
 
 Legal RAG needs a *legal-native ingestion layer* — one that understands document types, hierarchical structure, temporal relationships, jurisdictional scope, and bilingual instrument pairs before anything gets embedded. The LKB builds that layer.
 
-A planned upstream source is the [Translation Pipeline](../translation-pipeline/), which produces structure-corrected, translated legal documents in Markdown — the format the LKB expects. The goal is for translated output to flow directly into ingestion without manual reformatting, after which the LKB can serve as the authoritative citation layer for the LW.
+The [Translation Pipeline](../translation-pipeline/) is the designed upstream source for multilingual legal material. It produces structure-corrected, translated legal documents in Markdown — the format the LKB expects. The goal is for translated output to flow directly into ingestion without manual reformatting, after which the LKB can serve as the authoritative citation layer for the LW.
 
 ---
 
@@ -88,7 +88,7 @@ A planned upstream source is the [Translation Pipeline](../translation-pipeline/
 ┌─────────────────────────────────────────────────────┐
 │             LEGAL WIKI (LW)                         │
 │                                                     │
-│  Topics · Issues · Concepts · Timelines             │
+│  Topics · Issues · Concepts · Processes             │
 │  Entities · Questions                               │
 │  (source-backed synthesis, not authority)           │
 └─────────────────────────────────────────────────────┘
@@ -172,6 +172,20 @@ The system processes exactly one item at a time through `sources/incoming/`. Thi
 
 The one-item constraint prevents batch errors from cascading. Legal metadata requires human judgment — automated guesses about authority, instrument type, and publication date are starters, not answers.
 
+### AI-Assisted Review UI
+
+The LKB now has a browser-based review layer on top of the same canonical backend. It does not replace the `kb process` model; it gives the reviewer a more structured way to stage, inspect, confirm, and hand off an item.
+
+Current UI behavior:
+
+- **Primary law:** blocker-first review, reevaluation, immediate canonical ingest after explicit confirmation, and then optional Legal Wiki review.
+- **Notes, references, and templates:** lightweight file or pasted-text intake, AI-assisted metadata review, canonical ingest, and optional Legal Wiki review.
+- **Post-ingest Legal Wiki review:** staged topic overview, placement review, draft review, and explicit approve/reject decisions.
+- **Update proposals:** existing Legal Wiki pages can be proposed for update rather than silently ignored.
+- **Auditability:** execution logs and ingest reports keep the handoff reviewable even when the UI performs multiple behind-the-scenes steps.
+
+The key boundary remains unchanged: canonical ingest completes in the LKB first. The Legal Wiki step uses saved ingest outputs and indexed rows as source context; it does not rerun ingest or make the wiki authoritative.
+
 ### Four Content Categories
 
 | Category | What it is | Inbox shape | Key metadata |
@@ -218,6 +232,7 @@ The core LKB workflow now spans both intake and retrieval:
 - **`kb build-index`** — build or rebuild the SQLite search index
 - **`kb search`** — search indexed content by keyword and metadata filters
 - **`kb show`** — inspect a specific indexed document or fragment
+- **`kb drafting-suggest`** — summarize repeated lightweight-review edits into drafting preference suggestions
 
 ### Provenance & Audit
 
@@ -261,6 +276,9 @@ Because the current phase is structured retrieval — finding specific provision
 | Audit trail generation | ✅ Operational |
 | Editor support (VS Code schema + snippets) | ✅ Operational |
 | Source-backed downstream wiki drafting | ✅ Operational |
+| UI-assisted post-ingest Legal Wiki review | ✅ Operational |
+| Lightweight note/reference/template wiki handoff | ✅ Operational |
+| Existing wiki page update proposals | ✅ Operational |
 | Automated ingestion from [Translation Pipeline](../translation-pipeline/) | 🔧 Planned |
 | Embedding generation | 🔧 Planned |
 | RAG retrieval layer | 🔧 Planned |
@@ -271,7 +289,7 @@ Because the current phase is structured retrieval — finding specific provision
 ## Tech Stack
 
 - Python 3.10+ (CLI application installed via `pip install -e .`)
-- Custom CLI (`kb help`, `kb ui`, `kb build-manifest`, `kb init-family`, `kb process`, `kb validate`, `kb build-index`, `kb search`, `kb show`)
+- Custom CLI (`kb help`, `kb ui`, `kb build-manifest`, `kb init-family`, `kb process`, `kb validate`, `kb build-index`, `kb search`, `kb show`, `kb drafting-suggest`)
 - SQLite for full-text search indexing
 - YAML front matter for structured metadata
 - JSON Schema for editor autocomplete and validation
