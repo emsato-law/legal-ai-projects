@@ -47,9 +47,10 @@ The portfolio’s core knowledge flow is:
 - **Language-aware prompt architecture** — specialized prompts where linguistically necessary (Thai, Bengali), generic prompts where not
 - **Anti-runaway chunking** — production-hardened protections against LLM content expansion and infinite recursion in long documents
 - **Hybrid extraction routing** — born-digital PDFs go through local native extraction with page-level layout classification; scanned documents and raster images route to a switchable cloud OCR lane (currently, Google Document AI or Datalab)
-- **Cloud job architecture** — web control plane backed by queued long-running workers, durable job state, and retained per-step artifacts
+- **Cloud job architecture** — web control plane backed by queued long-running workers, durable job state, retained per-step artifacts, inspectable task logs, and stable job identities
 - **Partner and partial-workflow APIs** — server-to-server REST access with bearer-token auth, webhook delivery, idempotency keys, cancellation, purge, and step-specific artifact downloads
 - **Review-aware output** — warnings, review targets, and structured findings identify where human inspection is needed, rather than silently passing risky output
+- **Support and review surfaces** — Check Status and dashboard views expose job IDs, task-log viewing, and Step 1 to Step 2 cleanup diffs for operator review
 - **Step 1 to Step 2 diff viewer** — Advanced Mode compares raw conversion output against corrected/normalized Markdown before translation
 - **Inputs:** PDF, DOCX, images, public webpages
 - **Outputs:** Markdown, DOCX, HTML, PDF

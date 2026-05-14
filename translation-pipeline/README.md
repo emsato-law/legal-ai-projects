@@ -78,7 +78,7 @@ At a high level, the project is a web application backed by asynchronous process
 
 ### System Stack
 
-- **Frontend:** browser-based Quick Translation, Advanced Mode, Check Status, Step 1 to Step 2 cleanup diff, and dashboard workflows
+- **Frontend:** browser-based Quick Translation, Advanced Mode, Check Status with stable job IDs and task-log viewing, Step 1 to Step 2 cleanup diff, and dashboard workflows
 - **Web control plane:** FastAPI served from a managed cloud web runtime
 - **Long-running execution:** queued document jobs dispatched to isolated worker runs for pipeline processing
 - **State and artifacts:** durable job state plus retained source, intermediate, final, and task-log artifacts
@@ -161,7 +161,7 @@ The viewer helps reviewers inspect:
 - material additions, removals, or shrinkage between extracted and corrected Markdown
 - whether Step 2 improved the document or introduced a review issue before downstream translation
 
-Because the app retains per-step artifacts, this comparison is available on demand in Advanced Mode rather than being buried in logs or final output.
+Because the app retains per-step artifacts, this comparison is available on demand from Advanced Mode and related job views rather than being buried in logs or final output.
 
 ### Step 3: Translate
 
@@ -295,6 +295,7 @@ This is an active production system, in daily use for the builder's legal practi
 - **Switchable OCR routing** — hybrid Step 1 routing supports local/native extraction for safe born-digital inputs and cloud OCR for harder scans and images
 - **Thai OCR and legal-reference review** — scanned Thai pages now carry explicit review-required signals, legal-reference drift targets, incomplete-date warnings, and suspicious-amount review flags
 - **Step 1 to Step 2 diff viewer** — Advanced Mode can compare conversion output against corrected/normalized Markdown before translation or export
+- **Operator support surfaces** — Check Status now exposes stable job IDs, linked task-log viewing, and better handoff between status pages, retained artifacts, and dashboard review
 - **Gold-corpus QA** — real challenge PDFs are tracked against curated Gold Markdown, with candidate review reports before fixture changes
 - **TH-EN preserve rules** — Thai-to-English translation now protects narrow legal markers and selected formal references without broad semantic rewrites
 - **Warning guidance** — status pages, final documents, emails, and warning reference pages now present clearer guidance for manual review
