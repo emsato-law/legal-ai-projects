@@ -82,6 +82,13 @@ Use these defaults unless a maintainer asks for a deliberate change:
 - **DOCX Styler:** retired document-formatting tool
 - **SHA-SG:** version-controlled Singapore venture capital template set
 
+## GitLab CI Push Summary
+
+- This repo has `.gitlab-ci.yml`.
+- Before or during `git push`, state a push/merge CI summary in no more than 5 lines.
+- Include expected validation/build/deploy or mirror effects and branch/tag conditions.
+- Do not pause or delay the push solely to provide the summary; mention it as the push proceeds.
+
 ## Maintenance Rule
 
 If README content conflicts with this file, follow this file and update the README accordingly.
