@@ -26,9 +26,9 @@ This public repository explains the architecture, design decisions, and system f
 
 | Metric | Detail |
 |---|---|
-| **Combined codebase** | 617,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
-| **Total commits** | 2,200+ across verified active project repositories |
-| **Tracked project files** | 1,500+ files across verified active project repositories |
+| **Combined codebase** | 640,000+ tracked project lines (Python, JavaScript, HTML/CSS, Markdown) |
+| **Total commits** | 2,500+ across verified active project repositories |
+| **Tracked project files** | 3,100+ files across verified active project repositories |
 | **First commit** | 2023 |
 | **Stack** | Python · JavaScript · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Scheduled automations · Full deployment pipelines |
 
@@ -234,7 +234,7 @@ These systems share a common set of architectural principles:
 
 - **Background:** U.S.-qualified technology lawyer at DFDL Legal & Tax
 - **AI leadership roles:** AI Strategic Initiative committee member, regional lead for Knowledge Managers, and Legal AI Workflows Champion
-- **Builder:** designer and developer of the AI systems documented here — 617,000+ lines of production code and documentation across legal translation, knowledge management, document automation, and workflow orchestration
+- **Builder:** designer and developer of the AI systems documented here — 640,000+ tracked project lines across legal translation, knowledge management, document automation, and workflow orchestration
 - **Region:** based in ASEAN, working across Thai, Singaporean, and regional legal frameworks
 
 For more information: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.com/in/emsato/)
