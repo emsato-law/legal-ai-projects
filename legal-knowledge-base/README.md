@@ -1,10 +1,10 @@
 # Legal Knowledge Base (LKB)
 
-**Files-first ingestion system for legal RAG**
+**Files-first canonical ingestion and review system for legal knowledge**
 
-A CLI-driven knowledge base system that transforms primary legal regulations, secondary sources, templates, and practice notes into structured, validated, searchable, and version-controlled Markdown. The LKB is the canonical legal layer of the broader system and is currently focused on Thai and U.S. legal materials with multi-jurisdiction support.
+A files-first canonical knowledge base system that transforms primary legal regulations, secondary sources, templates, and practice notes into structured, validated, searchable, and version-controlled Markdown. The Legal Knowledge Base (LKB) is the canonical legal layer of the broader system and is currently focused on Thai and U.S. legal materials with multi-jurisdiction support.
 
-**Status:** Ingestion pipeline, validation, SQLite search index, UI-assisted review, and source-backed Legal Wiki handoff operational. RAG retrieval layer in active development.
+**Status:** Reviewed source-understanding packets, approved Source Units, canonical ingest, SQLite search index, UI-assisted review, and downstream Legal Wiki draft-packet preparation are operational. RAG retrieval layer in active development.
 
 The Legal Wiki (LW) is a separate synthesis layer built on top of LKB citations. It may summarize, compare, and organize the LKB, but it is not controlling authority.
 
@@ -178,11 +178,13 @@ The LKB now has a browser-based review layer on top of the same canonical backen
 
 Current UI behavior:
 
-- **Primary law:** blocker-first review, reevaluation, immediate canonical ingest after explicit confirmation, and then optional Legal Wiki review.
+- **Primary law:** blocker-first review, reevaluation, reviewed source-understanding and Source Unit approval, immediate canonical ingest after explicit confirmation, and then optional Legal Wiki review.
 - **Notes, references, and templates:** lightweight file or pasted-text intake, AI-assisted metadata review, canonical ingest, and optional Legal Wiki review.
-- **Post-ingest Legal Wiki review:** staged topic overview, placement review, draft review, and explicit approve/reject decisions.
-- **Update proposals:** existing Legal Wiki pages can be proposed for update rather than silently ignored.
-- **Auditability:** execution logs and ingest reports keep the handoff reviewable even when the UI performs multiple behind-the-scenes steps.
+- **Post-ingest Legal Wiki review:** staged topic overview, placement review, draft-packet review, and explicit approve/reject decisions.
+- **Update proposals:** existing Legal Wiki targets can be proposed for update rather than silently ignored.
+- **Auditability:** execution logs, ingest reports, reviewed Source Units, and downstream review packets keep the handoff reviewable even when the UI performs multiple behind-the-scenes steps.
+
+For primary law, the review layer now stages a reusable source-understanding pass around canonical ingest. The system can assemble a packet with source inventory, Page Index structure, bilingual alignment, line-numbered source text, and core metadata; AI can draft Source Units for reviewer approval, and those approved units can later anchor downstream Legal Wiki draft packets without making the Legal Wiki authoritative.
 
 The key boundary remains unchanged: canonical ingest completes in the LKB first. The Legal Wiki step uses saved ingest outputs and indexed rows as source context; it does not rerun ingest or make the wiki authoritative.
 
@@ -230,6 +232,7 @@ The core LKB workflow now spans both intake and retrieval:
 - **`kb process`** — process the single active inbox item through review, ingest, archive, and index refresh
 - **`kb validate`** — run semantic validation across canonical files
 - **`kb build-index`** — build or rebuild the SQLite search index
+- **`kb eval-source-units`** — evaluate or review Source Unit generation against canonical source material
 - **`kb search`** — search indexed content by keyword and metadata filters
 - **`kb show`** — inspect a specific indexed document or fragment
 - **`kb drafting-suggest`** — summarize repeated lightweight-review edits into drafting preference suggestions

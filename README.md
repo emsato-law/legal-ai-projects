@@ -26,9 +26,9 @@ This public repository explains the architecture, design decisions, and system f
 
 | Metric | Detail |
 |---|---|
-| **Combined codebase** | 140,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
-| **Total commits** | 1,900+ across verified active project repositories |
-| **Tracked project files** | 900+ files across verified active project repositories |
+| **Combined codebase** | 617,000+ lines (Python, JavaScript, HTML/CSS, Markdown) |
+| **Total commits** | 2,200+ across verified active project repositories |
+| **Tracked project files** | 1,500+ files across verified active project repositories |
 | **First commit** | 2023 |
 | **Stack** | Python · JavaScript · Direct LLM API integration (Gemini, Claude, GPT, MiniMax) · Custom prompt orchestration · Scheduled automations · Full deployment pipelines |
 
@@ -129,13 +129,13 @@ Partner API ─ Server-to-server integration
 ### [Legal Knowledge Base](./legal-knowledge-base/)
 **Files-first canonical legal knowledge layer** · *In active development*
 
-The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: ingestion, versioned Markdown, provenance, validation, audit trail, SQLite-backed search, and reviewed downstream Legal Wiki handoff.
+The Legal Knowledge Base (LKB) is the authoritative legal source layer for the system: reviewed source-understanding packets, approved Source Units, canonical ingest, provenance, validation, audit trail, SQLite-backed search, and downstream Legal Wiki draft-packet preparation.
 
 - **System role:** the canonical middle layer in `Translation Pipeline -> Legal Knowledge Base -> Legal Wiki`
 - **Designed upstream source:** the [Translation Pipeline](./translation-pipeline/), whose structure-corrected translated output is intended to flow into Legal Knowledge Base ingestion
-- **Current status:** ingestion, validation, UI-assisted review, canonical storage, search indexing, and source-backed downstream drafting are operational
-- **Post-ingest workflow:** primary law, notes, references, and templates can move from canonical ingest into a staged Legal Wiki review without making the wiki authoritative
-- **Downstream role:** the Legal Knowledge Base provides the source-backed citations that the Legal Wiki uses for synthesis pages
+- **Current status:** reviewed source-understanding packets, approved Source Units, canonical ingest, UI-assisted review, search indexing, and downstream Legal Wiki draft-packet preparation are operational
+- **Post-ingest workflow:** primary law, notes, references, and templates can move from canonical ingest into staged Legal Wiki review packets without making the wiki authoritative
+- **Downstream role:** the Legal Knowledge Base provides the source-backed citations and reviewed source packets that downstream Legal Wiki work depends on
 
 <div align="center">
   <img src="./legal-knowledge-base/screenshots/splash.png" alt="Legal Knowledge Base — AI-Assisted KB Ingest" width="600">
@@ -176,10 +176,10 @@ The Legal Wiki is the living synthesis layer for the legal knowledge system. It 
 ### [Automated Research Pipelines](./automated-research-pipelines/)
 **Scheduled AI-driven research, summarization, and distribution** · *In active use*
 
-A set of autonomous pipelines running on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, and updates dashboard-backed research stores. Current use cases include daily legal and AI briefings, general news monitoring, and tracking company developments, funding activity, and market movements across the AI legal sector.
+A set of autonomous research and monitoring pipelines running on scheduled agent sessions. Each run performs targeted web research, Gmail-backed source review, page-change checks, or structured dashboard maintenance, then updates dashboard-backed history stores and status surfaces. Current use cases include daily legal and AI briefings, AI legal-sector company tracking, AI Legal company analytics, crypto news, Tier 1 and Tier 1.5 crypto regulation monitoring, Thai DABO tracking, and regulatory page watchlists.
 
-- **Research modules:** Thai law, AI updates, general news, and AI legal-sector company tracking
-- **Dashboard output:** historical item stores, source-backed summaries, tag filtering, date-range views, and company profile pages
+- **Research modules:** Thai law, AI updates, general news, AI legal-sector company tracking, AI Legal analytics, Crypto News, Tier 1 Crypto Regulation, Tier 1.5 Crypto Regulation, Thai DABOs, and regulatory watchlists
+- **Dashboard output:** historical item stores, source-backed summaries, tag filtering, date-range views, tracked-company pages, company analytics views, saved-items review, automation-status rows, retained monitor-change history, and separate page-watchlist status
 - **Feedback loop:** local article feedback is read by the next scheduled run and folded into later tagging, relevance, and prioritization decisions
 - **Legacy migration:** older Discord-first dashboard processes are now process references, not runtime dependencies
 
@@ -234,11 +234,11 @@ These systems share a common set of architectural principles:
 
 - **Background:** U.S.-qualified technology lawyer at DFDL Legal & Tax
 - **AI leadership roles:** AI Strategic Initiative committee member, regional lead for Knowledge Managers, and Legal AI Workflows Champion
-- **Builder:** designer and developer of the AI systems documented here — 140,000+ lines of production code and documentation across legal translation, knowledge management, document automation, and workflow orchestration
+- **Builder:** designer and developer of the AI systems documented here — 617,000+ lines of production code and documentation across legal translation, knowledge management, document automation, and workflow orchestration
 - **Region:** based in ASEAN, working across Thai, Singaporean, and regional legal frameworks
 
 For more information: [emsato.com](https://emsato.com) or [LinkedIn](https://www.linkedin.com/in/emsato/)
 
 ---
 
-*Last updated: 10 May 2026*
+*Last updated: 3 July 2026*

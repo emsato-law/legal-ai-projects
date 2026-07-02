@@ -2,7 +2,7 @@
 
 **Scheduled AI-driven research, summarization, and distribution**
 
-A set of autonomous research pipelines that run on scheduled agent sessions. Each run performs targeted web research, produces structured summaries, writes source-backed dashboard data, and commits the updated research store without manual intervention. The dashboard keeps the output browsable by tag and sends article-level user feedback into the next scheduled update.
+A set of autonomous research and monitoring pipelines that run on scheduled agent sessions. Each run performs targeted web research, Gmail-backed source review, page-change checks, or structured dashboard maintenance, produces source-backed summaries, writes dashboard data, and commits the updated research store when the workflow calls for publication. The dashboard keeps output browsable by tag, date range, tracked company, jurisdiction, saved-review state, monitor history, automation health, and AI Legal company analytics.
 
 <div align="center">
   <img src="./screenshots/es-dashboard.png" alt="Research dashboard with tagged updates, feedback controls, and automation status" width="900">
@@ -52,7 +52,9 @@ These pipelines replace that daily manual scan with scheduled, AI-driven researc
 │              DASHBOARD OUTPUT                       │
 │                                                     │
 │  Historical JSON stores · Markdown content ·        │
-│  Git commit/push · Dashboard status · Tag views     │
+│  Git commit/push · Dashboard status · Tag views ·   │
+│  Saved review queue · Automation health rows ·      │
+│  Page-watchlist history · AI Legal analytics views  │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
@@ -77,34 +79,35 @@ Current modules:
 - **Thai law and regulatory updates** — Royal Gazette and regulator-focused monitoring.
 - **AI updates** — model, product, agent/tool, enterprise, safety, infrastructure, and policy developments.
 - **General news** — Thailand/ASEAN, global macro, markets, geopolitics, supply chains, technology, and policy context.
+- **AI legal-sector tracking** — company developments, funding, hiring, product/workflow changes, law firm adoption, in-house legal AI, market structure, and company analytics.
+- **Crypto News** — Gmail-backed review of selected newsletter sources, preserved article history, and batch-based homepage rotation.
+- **Thai DABOs** — Thai SEC-licensed digital asset business operator tracking plus ICO Portal/token-offering research.
 
 **Flow:**
 1. Scheduled automation starts the run.
-2. The agent searches current sources for each module.
-3. Items are filtered, summarized, tagged, and linked back to source URLs.
+2. The agent searches current sources or reviews configured inbound sources for each module.
+3. Items are filtered, summarized, tagged, and linked back to source URLs or source metadata.
 4. New items merge into existing historical item lists instead of replacing prior entries.
-5. Dashboard data and content files are committed and pushed.
+5. Dashboard data and content files are committed and pushed when the workflow publishes output.
 
-**Output:** Dashboard-ready JSON and Markdown content with source-backed summaries, stable item IDs, tags, dates, and impact notes. Every item exposes clickable tags for filtered historical views.
+**Output:** Dashboard-ready JSON and Markdown content with source-backed summaries, stable item IDs, tags, dates, and impact notes.
 
-### 2. AI Legal Sector Dashboard
+### 2. Crypto Regulation Modules
 
-A daily research pipeline that tracks company developments, funding rounds, hiring signals, workflow/product changes, law firm adoption, in-house legal AI, and market structure across selected AI legal companies.
+The dashboard includes structured crypto-regulation views for Tier 1 and Tier 1.5 jurisdictions. These modules track source-backed jurisdiction summaries, current regulatory posture, licensing or registration signals, market-structure developments, and follow-up points for deeper review.
 
-**Schedule:** 7:30 AM daily (Asia/Bangkok)
+- **Tier 1 Crypto Regulation** — United States, European Union, Singapore, Japan, Switzerland, United Kingdom, and Hong Kong.
+- **Tier 1.5 Crypto Regulation** — UAE/Dubai/ADGM, Australia, Cayman Islands, BVI, Bermuda, Gibraltar, Seychelles, and South Korea.
 
-**Flow:**
-1. Cron triggers at 7:30 AM
-2. Spawns an isolated agent session
-3. Agent searches for the latest AI legal sector news, focusing on tracked companies and exact company tags
-4. New items merge into the dashboard history store
-5. Company profile pages show tracked company metadata and related updates
-6. Changes are committed and pushed
-7. Run status is reflected in the dashboard automation status module
+### 3. Regulatory Watchlists
 
-**Output:** Updated dashboard data, company profile pages, and research content with source-backed updates.
+Alongside article-based research, the dashboard also carries page-change monitors for selected regulatory and reference pages where structural change matters more than article volume. These watchlists retain prior baselines, track different check cadences by tier, preserve recent-change history, and keep unreviewed changes visible until acknowledged.
 
-### 3. Feedback-Aware Updates
+### 4. AI Legal Company Analytics
+
+The AI Legal surface is now more than a stream of tagged updates. It also includes tracked-company profile pages and comparative analytics across funding, valuation, headquarters, hiring, and market-position groupings so recurring company checks can be reviewed as structured market maps instead of article fragments alone.
+
+### 5. Feedback-Aware Updates
 
 The dashboard includes article-level feedback. Feedback is saved locally, read by the next scheduled run, and used to adjust tagging, relevance, and future prioritization.
 
@@ -125,16 +128,19 @@ The next run treats that feedback as instruction-level input:
 
 Processed feedback is archived outside the committed dashboard content.
 
-### 4. Tag-Based Review
+### 6. Review Surfaces
 
-Tags are first-class navigation, not just labels. Each item tag links to a newest-first historical view for that topic, and module metadata exposes the canonical tag set for each research area.
+Tags remain first-class navigation, but the dashboard is now also a review surface for tracked-company pages, AI Legal analytics, jurisdiction modules, saved items, front-page automation health, and retained page-watchlist history.
 
-Tag views support:
+Review surfaces support:
 
-- cross-module review of recurring topics;
-- fast audit of why an item was classified under a topic;
-- company-specific AI Legal views using exact company tags;
-- date-range review across 15 days, 30 days, 6 months, 1 year, or all history.
+- cross-module review of recurring topics
+- jurisdiction-specific crypto regulation review
+- tracked-company review using exact company tags
+- AI Legal market-map review through funding, valuation, location, and hiring lenses
+- saved-item follow-up without keeping completed items pinned in the main stream
+- retained watchlist diff history with explicit acknowledgement after review
+- date-range review across 15 days, 30 days, 6 months, 1 year, or all history
 
 ---
 
