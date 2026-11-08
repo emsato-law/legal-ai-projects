@@ -233,7 +233,7 @@ These systems share a common set of architectural principles:
 ## About
 
 - **Background:** U.S.-qualified technology lawyer based in ASEAN
-- **Roles:** Senior Legal Consultant; Lead Knowledge Manager; Legal Workflows Champion; AI Strategic Initiative Committee member
+- **Roles:** Of Counsel; Lead Knowledge Manager; Legal Workflows Champion; AI Strategic Initiative Committee member
 - **Builder:** designer and developer of the AI systems documented here — 640,000+ tracked project lines across legal translation, knowledge management, document automation, and workflow orchestration
 - **Region:** based in ASEAN, working across Thai, Singaporean, and regional legal frameworks
 
